@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'League Spartan', sans-serif;
+    font-family: 'Manrope', sans-serif;
+}
+a {
+    cursor: pointer;
+}
+@layer component {
+    .color-transition-effect {
+        @apply transition-colors ease-in-out duration-500;
+    }
+}
