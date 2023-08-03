@@ -19,7 +19,7 @@ export default {
         'bg-color-default':'#FAFAFA'
       },
       fontSize:{
-        'heading-1': ['3.5', {
+        'heading-1': ['3.5rem', {
           lineHeight: '3.625rem',
           letterSpacing: '.125rem',
           fontWeight: '700',
@@ -58,10 +58,21 @@ export default {
           lineHeight: 'normal',
           letterSpacing: '.058rem',
           fontWeight: '700',
+        }],
+        'p':['.94rem',{
+          lineHeight: '1.56rem',
+          fontWeight: '500',
+        }],
+        'button':['.8125rem',{
+          lineHeight: 'normal',
+          letterSpacing: '.0625rem',
+          fontWeight: '700',
         }]
       },
       container: {
         center:true,
+        padding:' 2rem',
+        screens:{lg:'69.4rem'}
       }
     },
   },

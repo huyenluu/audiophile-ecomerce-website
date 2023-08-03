@@ -7,12 +7,13 @@ import AppLayout from "./ui/AppLayout"
 
 const router = createBrowserRouter([
   {
+    path: '/',
+    element: <Home />
+  },
+  {
     element: <AppLayout/>,
     children: [
-      {
-        path: '/',
-        element: <Home />
-      },
+
       {
         path: '/category',
         element: <ProductCategory/>,
