@@ -71,10 +71,12 @@ export default {
       },
       container: {
         center:true,
-        padding:' 2rem',
+        padding:'2rem',
         screens:{lg:'69.4rem'}
       }
     },
   },
   plugins: [],
 }
+
+// to-do custom padding for each screen with container class

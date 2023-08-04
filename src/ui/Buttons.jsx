@@ -1,4 +1,5 @@
 
+// className must have bg-color/hover:bg-color otherwise this button is white
 export const ButtonDefault = ({content, className}) => {
     return(
         <div className={`${className} py-4 px-8 w-fit cursor-pointer color-transition-effect`}>

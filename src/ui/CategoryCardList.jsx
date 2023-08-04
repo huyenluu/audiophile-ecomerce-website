@@ -1,29 +1,29 @@
 import { Link } from 'react-router-dom'
-import { ButtonArrow } from './buttons'
+import { ButtonArrow } from './Buttons'
 
 const  CATEGORY_MENU_ITEMS = [
     { 
         name: 'headphones',
-        path: 'category/headphones',
+        path: '/category/headphones',
         image: '/assets/shared/desktop/image-category-thumbnail-headphones.png'
     
     },
     {
         name: 'speakers',
-        path: 'category/speakers',
+        path: '/category/speakers',
         image: '/assets/shared/desktop/image-category-thumbnail-speakers.png'
     },
     {
         name: 'earphones',
-        path: 'category/earphones',
+        path: '/category/earphones',
         image: '/assets/shared/desktop/image-category-thumbnail-earphones.png'
     }
 ]
 
-// to add animation on opening card dropdown
+//to-do: add scroll animation
 function CategoryCardList({classname}) {
     return(
-        <div className={`${classname} rounded-br-lg rounded-bl-lg bg-white flex flex-col w-full z-[100] mb-20 sm:flex-row 
+        <div className={`${classname} rounded-br-lg rounded-bl-lg bg-white flex flex-col w-full z-[100] mb-16 sm:flex-row 
                 sm:gap-3 md:gap-6 lg:my-32`}>
             {
                 CATEGORY_MENU_ITEMS.map((item) => {
@@ -35,7 +35,7 @@ function CategoryCardList({classname}) {
                             <div className="text-center text-sm font-bold tracking-[1.07] uppercase text-black">
                                 {item.name}
                             </div>
-                            <Link to={item.path}>
+                            <Link to={item.path} onClick={()=> window.scrollTo(0, 0)}>
                                 <ButtonArrow content='Shop'/>
                             </Link>
                         </div>

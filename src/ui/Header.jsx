@@ -1,10 +1,16 @@
 import NavBar from './NavBar'
 
-function Header() {
+function Header({category}) {
 
         return (
-            <header>
+            <header className='bg-black'>
                 <NavBar />
+                <h1 className='text-heading-4 text-white uppercase my-8 text-center
+                                sm:text-heading-2 sm:my-16
+                                lg:my-24'
+                >
+                    {category}
+                </h1>
             </header>
         )
 }

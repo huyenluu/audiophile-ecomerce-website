@@ -1,8 +1,9 @@
 import CategoryCardList from "../../ui/CategoryCardList";
 import Overlay from "../../ui/Overlay";
 import NavBar from "../../ui/NavBar";
-import { ButtonDefault, ButtonDefaultOutline } from "../../ui/buttons";
+import { ButtonDefault, ButtonDefaultOutline } from "../../ui/Buttons";
 import Footer from "../../ui/Footer";
+import BestGearSection from "../../ui/BestGearSection"
 
 export default function Home() {
     return (
@@ -30,9 +31,9 @@ export default function Home() {
                     <ButtonDefault content="See product" className='bg-orange hover:bg-orange-lighter' />
                 </section>
             </div>
-            <div className="relative container">
+            <div className="container">
                 <CategoryCardList />
-                <div className="[&_.card]:rounded-lg [&_.card]:bg-cover [&_.card]:px-6 [&_.card:not(:last-child)]:mb-6
+                <section className="[&_.card]:rounded-lg [&_.card]:bg-cover [&_.card]:px-6 [&_.card:not(:last-child)]:mb-6
                                 [&_.card]:flex [&_.card]:flex-col [&_.card]:justify-center
                                 sm:[&_.card]:px-12 lg:[&_.card]:px-24 md:[&_.card:not(:last-child)]:mb-12 
                                 lg:[&_.card:first-of-type]:flex-row mb-32">
@@ -69,18 +70,8 @@ export default function Home() {
                             <ButtonDefaultOutline content='see product' />
                         </div>
                     </div>
-                </div>
-                <div className="flex flex-col items-center gap-y-8 mb-32 lg:flex-row-reverse lg:gap-16">
-                    <div className="w-full h-[18.75rem] rounded-lg
-                                    bg-[url(/assets/shared/mobile/image-best-gear.jpg)] bg-no-repeat bg-cover
-                                    sm:bg-[url(/assets/shared/tablet/image-best-gear.jpg)]
-                                    lg:bg-[url(/assets/shared/desktop/image-best-gear.jpg)]
-                                    lg:w-[33.75rem] lg:h-[36.75rem]"></div>
-                    <div className="max-w-[35.8rem] text-center lg:w-1/2 lg:max-w-[27.8rem] lg:text-left">
-                        <h3 className="text-heading-4 uppercase mb-8 lg:text-heading-2">Bringing you the <span className="text-orange">best</span> audio gear</h3>
-                        <p className="text-p">Located at the heart of New York City, Audiophile is the premier store for high end headphones, earphones, speakers, and audio accessories. We have a large showroom and luxury demonstration rooms available for you to browse and experience a wide range of our products. Stop by our store to meet some of the fantastic people who make Audiophile the best place to buy your portable audio equipment.</p>
-                    </div>
-                </div>
+                </section>
+                <BestGearSection/>
             </div>
             <Footer/>
         </div>

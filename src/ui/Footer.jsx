@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { AiFillFacebook, AiOutlineTwitter, AiOutlineInstagram } from 'react-icons/ai'
+import NavigationLink from './NavigationLink'
 
 function Footer() {
     return (
@@ -14,20 +15,8 @@ function Footer() {
                         alt='logo'
                     />
                 </Link>
-                <div className="flex flex-col items-center gap-y-4
-                                sm:flex-row gap-8">
-                    <Link to="/" className="text-sm font-bold tracking-[2] leading-[25px] uppercase text-white hover:text-orange color-transition-effect">
-                        Home
-                    </Link>
-                    <Link to="/category/headphones" className="text-sm font-bold tracking-[2] leading-[25px] uppercase text-white hover:text-orange color-transition-effect">
-                        HEADPHONES
-                    </Link>
-                    <Link to="/category/speakers" className="text-sm font-bold tracking-[2] leading-[25px] uppercase text-white hover:text-orange color-transition-effect">
-                        SPEAKERS
-                    </Link>
-                    <Link to="/category/earphones" className="text-sm font-bold tracking-[2] leading-[25px] uppercase text-white hover:text-orange color-transition-effect">
-                        EARPHONES
-                    </Link>
+                <div  className="flex flex-col items-center gap-y-4 sm:flex-row gap-8">
+                    <NavigationLink/>
                 </div>
                 <div className="text-center text-p self-stretch opacity-50
                                 sm:text-left">

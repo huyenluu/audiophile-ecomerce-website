@@ -2,8 +2,11 @@ import { useState } from "react"
 import { Link } from 'react-router-dom'
 import CategoryCardList from './CategoryCardList'
 import { FiShoppingCart } from 'react-icons/fi'
+import NavigationLink from "./NavigationLink";
 
-const MENU_ITEMS = ['home', 'headphones','speakers','earphones']
+//to-do: added animation on menu card dropdown
+//to-do: added page transition animation
+
 function NavBar({home}) {
     const [isDropdownMenuOpen, setDropDownMenuOpen] = useState(false);
     const handleClickMenuIcon = () => {
@@ -20,29 +23,23 @@ function NavBar({home}) {
                             container px-6 py-8
                             ${!isDropdownMenuOpen && "border-b border-b-gray-700"}`}
                 >
-                    <div className='flex items-center gap-10'>
+                    <div className='flex items-center sm:gap-10 flex-1 lg:flex-none'>
                         <img
                             src='/assets/shared/tablet/icon-hamburger.svg'
                             className='w-[16px] h-[15px] cursor-pointer lg:hidden'
                             onClick={handleClickMenuIcon}
                             alt='menu icon'
                         />
-                        <Link to='/'>
+                        <Link to='/' className="flex-1">
                             <img
                                 src="/assets/shared/desktop/logo.svg"
-                                className="min-h-0 min-w-0 mt-1"
+                                className="min-h-0 min-w-0 mt-1 m-auto sm:m-[unset]"
                                 alt='logo'
                             />
                         </Link>
                     </div>
-                    <div className='w-1/3 justify-center gap-8 hidden lg:inline-flex'>
-                        {MENU_ITEMS.map(item =>
-                        (
-                            <Link key={item} className="text-sm font-bold tracking-[2] leading-[25px] uppercase text-white hover:text-orange color-transition-effect">
-                                {item}
-                            </Link>
-                        )
-                        )}
+                    <div className='justify-center gap-8 hidden lg:flex flex-1 -ml-[143px]'> {/* 143px is audiophile logo width */}
+                        <NavigationLink/>
                     </div>
                     <FiShoppingCart size={24} color='white' className='hover:stroke-orange'/>
                 </div>
