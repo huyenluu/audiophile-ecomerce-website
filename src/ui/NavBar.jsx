@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Link } from 'react-router-dom'
 import CategoryCardList from './CategoryCardList'
+import { FiShoppingCart } from 'react-icons/fi'
 
 const MENU_ITEMS = ['home', 'headphones','speakers','earphones']
 function NavBar({home}) {
@@ -14,7 +15,7 @@ function NavBar({home}) {
         
     }
     return (
-        <nav className={home?"":"bg-black"}>
+        <nav className={`${home?"":"bg-black"} z-[200]`}>
                 <div className={`flex flex-row w-full items-center justify-between 
                             container px-6 py-8
                             ${!isDropdownMenuOpen && "border-b border-b-gray-700"}`}
@@ -43,13 +44,9 @@ function NavBar({home}) {
                         )
                         )}
                     </div>
-                    <img
-                        src="/assets/shared/desktop/icon-cart.svg"
-                        className="min-h-0 min-w-0 w-6"
-                        alt='cart-icon'
-                    />
+                    <FiShoppingCart size={24} color='white' className='hover:stroke-orange'/>
                 </div>
-                {isDropdownMenuOpen && <CategoryCardList classname='absolute top-[6rem] px-6 z-[200]'/>}
+                {isDropdownMenuOpen && <CategoryCardList classname='absolute top-[6rem] px-6 z-[200] pb-20'/>}
             </nav>
     )
 }

@@ -7,6 +7,7 @@ import Footer from "../../ui/Footer";
 export default function Home() {
     return (
         <div className="relative">
+            <Overlay />
             <div
                 className='bg-[#191919] bg-[url(/assets/home/mobile/image-header.jpg)] bg-contain 50 bg-[center_100%] bg-no-repeat min-h-[31.88rem]
                 sm:bg-[url(/assets/home/tablet/image-header.jpg)] sm:min-h-[45.6rem]
@@ -30,7 +31,6 @@ export default function Home() {
                 </section>
             </div>
             <div className="relative container">
-                <Overlay />
                 <CategoryCardList />
                 <div className="[&_.card]:rounded-lg [&_.card]:bg-cover [&_.card]:px-6 [&_.card:not(:last-child)]:mb-6
                                 [&_.card]:flex [&_.card]:flex-col [&_.card]:justify-center
