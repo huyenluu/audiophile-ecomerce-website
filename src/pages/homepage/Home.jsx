@@ -5,6 +5,7 @@ import { ButtonDefault, ButtonDefaultOutline } from "../../ui/Buttons";
 import Footer from "../../ui/Footer";
 import BestGearSection from "../../ui/BestGearSection"
 
+//to-do: remove hard-code data from this page and replace with a data object
 export default function Home() {
     return (
         <div className="relative">
