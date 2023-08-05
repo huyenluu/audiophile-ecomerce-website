@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ButtonArrow } from './Buttons'
 
-const  CATEGORY_MENU_ITEMS = [
+export const  CATEGORY_MENU_ITEMS = [
     { 
         name: 'headphones',
         path: '/category/headphones',

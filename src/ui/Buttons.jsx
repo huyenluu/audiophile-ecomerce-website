@@ -1,9 +1,20 @@
 import { Link } from "react-router-dom"
 
 // className must have bg-color/hover:bg-color otherwise this button is white
-export const ButtonDefault = ({content, className, link, handleClick}) => {
+export const ButtonDefault = ({content, className, link, handleClick, moveToTop}) => {
+    const handleMoveToTop = () => {
+        if(!moveToTop) {
+            return
+        }else {
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+              });
+        }
+    }
     return(
-        <Link to={link} onClick={handleClick}>
+        <Link to={link} onClick={()=>{handleMoveToTop()}}>
             <div className={`${className} py-4 px-8 w-fit cursor-pointer color-transition-effect`}>
                 <div className="whitespace-nowrap text-button uppercase text-white">
                     {content}

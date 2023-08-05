@@ -16,9 +16,8 @@ function ProductCard({data, index, showPrice, handleClickBtnAdd}) {
             <div className="bg-grey-white relative flex flex-col mb-2 items-center justify-center w-full pt-8 pb-12 rounded-lg">
                 <Image 
                     linkObj={data.categoryImage} 
-                    width={{mobile:'220', tablet:'550', desktop:'349'}}
                     alt={data.slug}
-                    className="h-auto"
+                    className="h-auto w-[220px] sm:w-[550px] lg:w-[349px]"
                 />
             </div>
             <div className={`flex flex-col gap-6 w-full ${showPrice?'items-start':'items-center'} justify-center lg:items-start`}>
@@ -47,7 +46,7 @@ function ProductCard({data, index, showPrice, handleClickBtnAdd}) {
                             <ButtonDefault 
                                 content="add to card" 
                                 className="bg-orange hover:bg-orange-lighter"
-                                handleClick={handleClickBtnAdd}
+                                //handleClick={handleClickBtnAdd}
                             />
                         </div>
                     </div>

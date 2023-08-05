@@ -7,6 +7,11 @@ export function getAllData() {
 }
 const allProducts = getAllData()
 
+export function getCategoriesName() {
+    const uniqueCategoryNameArray = [...new Set(allProducts.map(obj => obj.category))]
+    return uniqueCategoryNameArray;
+}
+
 export function getCategoryProducts(category) {
     const currentCategoryProducts = allProducts && allProducts.filter(product => product.category === category)
     currentCategoryProducts.sort((current,next)=> {
