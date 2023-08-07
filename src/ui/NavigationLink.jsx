@@ -7,7 +7,7 @@ function NavigationLink() {
                 <Link 
                     to={item === 'home' ? "/" :`/category/${item}`} 
                     key={item}
-                    onClick={()=> window.scrollTo(0, 0)}
+                    onClick={() => window.scrollTo({top: 0,left: 0,behavior: 'smooth'})}
                     className="text-sm font-bold tracking-[2] leading-[25px] uppercase text-white hover:text-orange color-transition-effect"
                 >
                     {item}

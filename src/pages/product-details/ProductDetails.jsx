@@ -3,7 +3,7 @@ import ProductCard from "../products-category/ProductCard"
 import CategoryCardList from "../../ui/CategoryCardList"
 import Image from "../../ui/Image"
 import { ButtonDefault } from "../../ui/Buttons"
-import { getCategoriesName } from "../../services/apiEshop"
+import { generateProductUrlbasedOnSlug } from "../../utilities/utilities"
 //import { useEffect } from "react"
 
 //to-do: add link to see product btn
@@ -13,20 +13,6 @@ import { getCategoriesName } from "../../services/apiEshop"
 function ProductDetails() {
     const [product] = useLoaderData()
     const navigate = useNavigate()
-    const categoryNameArr = getCategoriesName()
-    const generateProductUrlbasedOnSlug = (slug) => {
-        const splitedSlug = slug.split("-")
-       let productCategoryName
-        splitedSlug.forEach(name => {
-            categoryNameArr.forEach((categoryName) => {
-                if(categoryName === name || categoryName.slice(0,-1) === name) {
-                    productCategoryName = categoryName
-                } 
-            })
-        })
-        return `/category/${productCategoryName}/${slug}`
-    }
-
     // useEffect(() => {
     //     window.scroll(0,0)
     // },[])

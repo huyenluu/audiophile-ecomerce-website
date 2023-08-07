@@ -6,7 +6,11 @@ import CategoryCardList from '../../ui/CategoryCardList'
 function ProductsCategory() {
     const productsData = useLoaderData()
     useEffect(() => {
-        window.scroll(0,0)
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+          });
     },[])
     return (
         <div className="container">

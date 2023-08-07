@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { ButtonArrow } from './Buttons'
 
 export const  CATEGORY_MENU_ITEMS = [
@@ -35,9 +34,11 @@ function CategoryCardList({classname}) {
                             <div className="text-center text-sm font-bold tracking-[1.07] uppercase text-black">
                                 {item.name}
                             </div>
-                            <Link to={item.path} onClick={()=> window.scrollTo(0, 0)}>
-                                <ButtonArrow content='Shop'/>
-                            </Link>
+                            <ButtonArrow
+                                    content='Shop'
+                                    link={item.path}
+                                    moveToTop
+                            />
                         </div>
                         <img
                             src={item.image}

@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Image from "../../ui/Image"
 import {ButtonDefault} from "../../ui/Buttons"
 import Counter from "../../components/Counter";
@@ -35,6 +35,7 @@ function ProductCard({data, index, showPrice, handleClickBtnAdd}) {
                         content="see product" 
                         className="bg-orange hover:bg-orange-lighter"
                         link={`${location.pathname}/${data.slug}`}
+                        moveToTop
                     />
                 }
                 {
@@ -43,11 +44,12 @@ function ProductCard({data, index, showPrice, handleClickBtnAdd}) {
                         <div className="text-heading-6 mb-6">{`$${data.price}`}</div>
                         <div className="flex w-[18.5rem] justify-between items-center">
                             <Counter getCounter={getCounter}/>
-                            <ButtonDefault 
-                                content="add to card" 
-                                className="bg-orange hover:bg-orange-lighter"
-                                //handleClick={handleClickBtnAdd}
-                            />
+                            <Link>
+                                <ButtonDefault 
+                                    content="add to card" 
+                                    className="bg-orange hover:bg-orange-lighter"
+                                />
+                            </Link>
                         </div>
                     </div>
                 }
