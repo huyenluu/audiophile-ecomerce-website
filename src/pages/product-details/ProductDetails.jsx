@@ -24,7 +24,7 @@ function ProductDetails() {
                     navigate(-1)
                     window.scroll(0,0)
                 }}
-                className="absolute top-6 text-sm opacity-50 lg:top-16"
+                className="absolute top-6 text-sm opacity-50 sm:top-12 lg:top-16"
             >
                 Go back
             </button>

@@ -21,12 +21,12 @@ function ProductCard({data, index, showPrice, handleClickBtnAdd}) {
                 />
             </div>
             <div className={`flex flex-col gap-6 w-full ${showPrice?'items-start':'items-center'} justify-center lg:items-start`}>
-                {data.new && (<div className="text-overline text-orange">NEW PRODUCT</div>)}
-                <h4 className="text-heading-4 uppercase text-center lg:text-left
-                                sm:text-heading-2">
+                {data.new && (<div className={`text-overline text-orange ${showPrice?'text-left':'text-center sm:text-left'}`}>NEW PRODUCT</div>)}
+                <h4 className={`text-heading-4 uppercase ${showPrice?'text-left':'text-center sm:text-left'}
+                                sm:text-heading-2`}>
                     {data.name}
                 </h4>
-                <p className={`${showPrice?'items-start':'items-center'}text-p opacity-50 lg:text-left max-w-[35.75rem]`}>
+                <p className={`${showPrice?'text-left':'text-center sm:text-left'}text-p opacity-50 lg:text-left max-w-[35.75rem]`}>
                     {data.description}
                 </p>
                 {

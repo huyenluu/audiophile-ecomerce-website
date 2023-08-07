@@ -1,6 +1,7 @@
 import { Outlet, useLocation, useParams } from "react-router-dom"
 import Footer from "./Footer"
 import Header from "./Header"
+import Overlay from "./Overlay"
 import BestGearSection from "./BestGearSection"
 
 function AppLayout() {
@@ -12,6 +13,7 @@ function AppLayout() {
             {isCategoryPage && <Header category={categoryName}/>}
             {!isCategoryPage && <Header/>}
             <main id='main' className="relative flex-grow">
+                <Overlay />
                 <Outlet />
                 <BestGearSection className='container'/>
             </main>

@@ -17,7 +17,7 @@ export const ButtonDefault = ({content, className, link, handleClick, moveToTop}
         link  ? (
             <Link to={link} onClick={()=>{handleMoveToTop(moveToTop)}}>
                 <div className={`${className} py-4 px-8 w-fit cursor-pointer color-transition-effect`}>
-                    <div className="whitespace-nowrap text-button uppercase text-white">
+                    <div className="whitespace-nowrap text-button uppercase text-white text-center">
                         {content}
                     </div>
                 </div>

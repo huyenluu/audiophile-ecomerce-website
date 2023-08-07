@@ -15,14 +15,14 @@ function Counter({getCounter}) {
         getCounter(counter)
     },[counter, getCounter])
     return (
-        <div className="bg-grey-white flex flex-row gap-5 h-12 shrink-0 items-center px-4">
-            <button className="text-center text-sm font-bold uppercase w-4 shrink-0 cursor-pointer" onClick={handleClickMinus}>
+        <div className="bg-grey-white flex flex-row gap-5 h-12 items-center px-4 w-24 sm:w-[7.5rem] justify-between">
+            <button className="text-center text-sm font-bold uppercase shrink-0 cursor-pointer" onClick={handleClickMinus}>
             -
             </button>
-            <div className="text-center text-sm font-bold uppercase mr-px w-4 shrink-0">
+            <div className="text-center text-sm font-bold uppercase mr-px shrink-0">
                 {counter}
             </div>
-            <button className="text-center text-sm font-bold uppercase w-4 shrink-0 cursor-pointer" onClick={handleClickPlus}>
+            <button className="text-center text-sm font-bold uppercase shrink-0 cursor-pointer" onClick={handleClickPlus}>
             +
             </button>
         </div>
