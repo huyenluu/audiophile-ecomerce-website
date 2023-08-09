@@ -14,6 +14,8 @@ export async function getAllProducts() {
     if(error) {
         console.error(error)
         throw new Error("couldn't load data")
+    }else if(data.length < 1) {
+        throw new Error("There is no data available at this moment. please try again later!")
     }
     return data
 }
@@ -27,7 +29,7 @@ export async function getProductsByCategory(category) {
         .ilike('category', category)
         if(error) {
             console.error(error)
-            throw new Error("Couldn't load data")
+            throw new Error("There is no data available at this moment. please try again later!")
         }
 
         return sortProductsNewFirst(products)

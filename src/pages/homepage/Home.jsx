@@ -1,3 +1,4 @@
+import { useNavigation } from "react-router-dom";
 import CategoryCardList from "../../ui/CategoryCardList";
 import Overlay from "../../ui/Overlay";
 import NavBar from "../../ui/NavBar";
@@ -7,16 +8,21 @@ import BestGearSection from "../../ui/BestGearSection"
 import data from "../../services/homePageProducts.json";
 import { generateProductUrlbasedOnSlug } from "../../utilities/utilities"
 import Image from "../../ui/Image"
+import Loader from "../../ui/Loader"
 
 export default function Home() {
+    const navigation = useNavigation();
+    const isLoading = navigation.state === 'loading';
     const [heroSectionProduct] = data.filter((product) => product.position === 'hero')
     const [firstCardProduct] = data.filter((product) => product.position === 'card1')
     const [secondCardProduct] = data.filter((product) => product.position === 'card2')
     const [thirdCardProduct] = data.filter((product) => product.position === 'card3')
+    
 
     return (
         <div className="relative">
             <Overlay />
+            {isLoading && <Loader />}
             <div className='bg-[#191919] bg-[url(/assets/home/mobile/image-header.jpg)] bg-contain 50 bg-[center_100%] bg-no-repeat min-h-[31.88rem]
                             sm:bg-[url(/assets/home/tablet/image-header.jpg)] sm:min-h-[45.6rem]
                             lg:bg-[url(/assets/home/desktop/image-hero.jpg)] 
