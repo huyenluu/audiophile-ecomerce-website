@@ -13,16 +13,12 @@ import { generateProductUrlbasedOnSlug } from "../../utilities/utilities"
 function ProductDetails() {
     const [product] = useLoaderData()
     const navigate = useNavigate()
-    // useEffect(() => {
-    //     window.scroll(0,0)
-    // },[])
 
     return (
         <div className="container">
             <button 
                 onClick={() => {
                     navigate(-1)
-                    window.scroll(0,0)
                 }}
                 className="absolute top-6 text-sm opacity-50 sm:top-12 lg:top-16"
             >

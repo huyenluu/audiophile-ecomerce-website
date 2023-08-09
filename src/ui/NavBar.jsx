@@ -2,9 +2,8 @@ import { useState } from "react"
 import { Link } from 'react-router-dom'
 import CategoryCardList from './CategoryCardList'
 import { FiShoppingCart } from 'react-icons/fi'
-import NavigationLink from "./NavigationLink";
-import Cart from "../components/Cart";
-import logo from "../../public/assets/shared/desktop/logo.svg"
+import NavigationLink from "./NavigationLink"
+import Cart from "../components/Cart"
 
 //to-do: implemented card modal
 //to-do: close menu card when user clicked on one of the items
@@ -53,7 +52,7 @@ function NavBar({home}) {
                         />
                         <Link to='/' className="flex-1 cursor-pointer">
                             <img
-                                src={logo}
+                                src="/assets/shared/desktop/logo.svg"
                                 className="w-[8.9rem] h-[1.56rem] m-auto sm:m-[unset]"
                                 alt='logo'
                             />

@@ -27,7 +27,7 @@ export const ButtonDefault = ({content, className, link, handleClick, moveToTop}
                 className={`${className} py-4 px-8 w-fit cursor-pointer color-transition-effect`} 
                 onClick={handleClick}
             >
-                <div className="whitespace-nowrap text-button uppercase text-white">
+                <div className="whitespace-nowrap text-button uppercase text-white text-center">
                     {content}
                 </div>
             </div>
@@ -39,7 +39,7 @@ export const ButtonDefaultOutline = ({content, className, moveToTop, link, handl
         link ? (
             <Link to={link} onClick={()=>{handleMoveToTop(moveToTop)}}>
                 <div className={`${className} py-4 px-8 w-fit cursor-pointer border border-black hover:bg-gray-700 color-transition-effect`}>
-                    <div className="whitespace-nowrap text-button uppercase ">
+                    <div className="whitespace-nowrap text-button uppercase text-center">
                         {content}
                     </div>
                 </div>
@@ -49,7 +49,7 @@ export const ButtonDefaultOutline = ({content, className, moveToTop, link, handl
                 className={`${className} py-4 px-8 w-fit cursor-pointer border border-black hover:bg-gray-700 color-transition-effect`}
                 onClick={handleClick}
             >
-                <div className="whitespace-nowrap text-button uppercase ">
+                <div className="whitespace-nowrap text-button uppercase text-center">
                     {content}
                 </div>
             </div>

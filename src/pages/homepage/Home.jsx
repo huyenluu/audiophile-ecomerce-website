@@ -8,20 +8,19 @@ import data from "../../services/homePageProducts.json";
 import { generateProductUrlbasedOnSlug } from "../../utilities/utilities"
 import Image from "../../ui/Image"
 
-
 export default function Home() {
     const [heroSectionProduct] = data.filter((product) => product.position === 'hero')
     const [firstCardProduct] = data.filter((product) => product.position === 'card1')
     const [secondCardProduct] = data.filter((product) => product.position === 'card2')
     const [thirdCardProduct] = data.filter((product) => product.position === 'card3')
+
     return (
         <div className="relative">
             <Overlay />
-            <div className={`bg-[url(${heroSectionProduct.image.mobile.substring(1)})] 
-                            bg-[#191919] bg-contain bg-[center_100%] bg-no-repeat min-h-[31.88rem] 
-                            w-full text-white flex flex-col relative
-                            sm:bg-[url(${heroSectionProduct.image.tablet.substring(1)})] sm:min-h-[45.6rem]
-                            lg:bg-[url(${heroSectionProduct.image.desktop.substring(1)})]`}
+            <div className='bg-[#191919] bg-[url(/assets/home/mobile/image-header.jpg)] bg-contain 50 bg-[center_100%] bg-no-repeat min-h-[31.88rem]
+                            sm:bg-[url(/assets/home/tablet/image-header.jpg)] sm:min-h-[45.6rem]
+                            lg:bg-[url(/assets/home/desktop/image-hero.jpg)] 
+                            w-full text-white flex flex-col relative'
             >
                 <NavBar />
                 <section className="container w-full text-center flex flex-col items-center flex-grow justify-center
@@ -70,10 +69,10 @@ export default function Home() {
                         </div>
                         
                     </div>
-                    <div className={`card bg-[url(${secondCardProduct.image.mobile.substring(1)})] 
+                    <div className="card bg-[url(/assets/home/mobile/image-speaker-zx7.jpg)] 
                                 min-h-[19rem] 
-                                sm:h-[20rem] sm:bg-[url(${secondCardProduct.image.tablet.substring(1)})]
-                                lg:bg-[url(${secondCardProduct.image.desktop.substring(1)})]`}>
+                                sm:h-[20rem] sm:bg-[url(/assets/home/tablet/image-speaker-zx7.jpg)]
+                                lg:bg-[url(/assets/home/desktop/image-speaker-zx7.jpg)]">
                         <h2 className="text-heading-4 text-black mb-6 uppercase">{secondCardProduct.name}</h2>
                         <ButtonDefaultOutline 
                             content='see product'
@@ -82,9 +81,9 @@ export default function Home() {
                         />
                     </div>
                     <div className="flex flex-col sm:flex-row sm:gap-6">
-                        <div className={`card bg-[url(${thirdCardProduct.image.mobile.substring(1)})] shrink-0 h-[12.5rem] bg-center 
-                                        sm:w-1/2 sm:h-[20rem] sm:bg-[url(${thirdCardProduct.image.tablet.substring(1)})]
-                                        lg:bg-[url(${thirdCardProduct.image.desktop.substring(1)})]`}></div>
+                        <div className="card bg-[url(/assets/home/mobile/image-earphones-yx1.jpg)] shrink-0 h-[12.5rem] bg-center 
+                                        sm:w-1/2 sm:h-[20rem] sm:bg-[url(/assets/home/tablet/image-earphones-yx1.jpg)]
+                                        lg:bg-[url(/assets/home/desktop/image-earphones-yx1.jpg)]"></div>
 
                         <div className="card bg-grey-white h-[12.5rem]
                                         sm:w-1/2 sm:h-[20rem]">
