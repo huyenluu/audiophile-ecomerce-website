@@ -4,7 +4,7 @@ import ProductCard from './ProductCard'
 import CategoryCardList from '../../ui/CategoryCardList'
 
 function ProductsCategory() {
-    const productsData = useLoaderData()
+    const productsData = useLoaderData() || [];
     useEffect(() => {
         window.scrollTo({
             top: 0,
@@ -12,6 +12,7 @@ function ProductsCategory() {
             behavior: 'smooth'
           });
     },[])
+    if(productsData === undefined) return null
     return (
         <div className="container">
             {productsData.map((product, index) => {

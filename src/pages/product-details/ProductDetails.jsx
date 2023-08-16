@@ -8,13 +8,14 @@ import { generateProductUrlbasedOnSlug } from "../../utilities/utilities"
 
 
 //to-do: split features text in 2 paragrafs
-function ProductDetails() {
-    const [product] = useLoaderData()
-    const navigate = useNavigate()
 
+function ProductDetails() {
+    const [product] = useLoaderData() || []
+    const navigate = useNavigate()
+    if (product === undefined) return null
     return (
         <div className="container">
-            <button 
+            <button
                 onClick={() => {
                     navigate(-1)
                 }}
@@ -22,7 +23,7 @@ function ProductDetails() {
             >
                 Go back
             </button>
-            <ProductCard data={product} showPrice/>
+            <ProductCard data={product} showPrice />
             <div className="mb-20 lg:flex lg:justify-between lg:gap-20">
                 <div className="mb-20 lg:w-[70%]">
                     <h2 className="text-heading-5 uppercase sm:text-heading-3 mb-6">features</h2>
@@ -43,44 +44,44 @@ function ProductDetails() {
             <div className="flex flex-col items-center justify-center gap-4 mb-28
                             sm:flex-row lg:gap-8">
                 <div className="flex flex-col items-center gap-4 lg:gap-8 sm:h-full">
-                    <Image 
-                        linkObj={product.gallery.first} 
+                    <Image
+                        linkObj={product.gallery.first}
                         className="h-[174px] lg:h-[280px] rounded-lg"
-                        alt="product image galerie 1"/>
-                    <Image 
-                        linkObj={product.gallery.second} 
+                        alt="product image galerie 1" />
+                    <Image
+                        linkObj={product.gallery.second}
                         className="h-[174px] lg:h-[280px] rounded-lg"
-                        alt="product image galerie 2"/>
+                        alt="product image galerie 2" />
                 </div>
                 <div>
                     <Image
-                        linkObj={product.gallery.third}     
-                        className="h-[368px] lg:h-[592px] rounded-lg" 
-                        alt="product image galerie 3"/>
+                        linkObj={product.gallery.third}
+                        className="h-[368px] lg:h-[592px] rounded-lg"
+                        alt="product image galerie 3" />
                 </div>
             </div>
             <div className="sm:mb-28">
                 <h3 className="w-full text-heading-5 uppercase text-center mb-10 sm:text-heading-3">You also may like</h3>
                 <ul className="sm:flex sm:justify-between">
                     {product.others.map((item) =>
-                        (<li key={item.name} className="flex flex-col items-center gap-8 mb-12 sm:mb-0 sm:w-1/3 sm:gap-8">
-                            <Image 
-                                linkObj={item.image} 
-                                alt={item.slug}
-                                className="h-auto w-[95%]"
-                            />
-                            <h5 className="w-full text-heading-5 uppercase text-center">{item.name}</h5>
-                            <ButtonDefault 
-                                content="see product" 
-                                className="bg-orange hover:bg-orange-lighter"
-                                link={generateProductUrlbasedOnSlug(item.slug)}
-                                moveToTop
-                            />
-                        </li>)
+                    (<li key={item.name} className="flex flex-col items-center gap-8 mb-12 sm:mb-0 sm:w-1/3 sm:gap-8">
+                        <Image
+                            linkObj={item.image}
+                            alt={item.slug}
+                            className="h-auto w-[95%]"
+                        />
+                        <h5 className="w-full text-heading-5 uppercase text-center">{item.name}</h5>
+                        <ButtonDefault
+                            content="see product"
+                            className="bg-orange hover:bg-orange-lighter"
+                            link={generateProductUrlbasedOnSlug(item.slug)}
+                            moveToTop
+                        />
+                    </li>)
                     )}
                 </ul>
             </div>
-            <CategoryCardList/>
+            <CategoryCardList />
         </div>
     )
 }
