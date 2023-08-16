@@ -1,29 +1,40 @@
-import { useState } from "react"
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from "react"
+import { Link, useLocation } from 'react-router-dom'
 import CategoryCardList from './CategoryCardList'
 import { FiShoppingCart } from 'react-icons/fi'
 import NavigationLink from "./NavigationLink"
-import Cart from "../components/Cart"
+import Cart from "../components/cart/Cart"
+import { useSelector } from "react-redux"
+import { getTotalCartQuantity } from "../redux/cartSlice"
 
-//to-do: implemented card modal
-//to-do: close menu card when user clicked on one of the items
+
 //to-do: added animation on menu card dropdown
 //to-do: added page transition animation
 
 function NavBar({home}) {
     const [isDropdownMenuOpen, setDropDownMenuOpen] = useState(false)
     const [isCartOpen, setIsCardOpen] = useState(false)
+    const location = useLocation();
+    const isCheckoutPage = location.pathname.includes('checkout')
+    const itemsNumber = useSelector(getTotalCartQuantity)
 
+    const toggleOverlay = () => {
+        const elements = document.getElementById('overlay')
+        if(elements !== null) {
+            elements.classList.toggle("hidden")
+        }
+    }
+    const removeOverlay = () => {
+        const elements = document.getElementById('overlay')
+        elements.classList.add("hidden")
+    }
     const toggleCardOpen = () => {
         setIsCardOpen(prevState => !prevState)
         if(isDropdownMenuOpen === true) {
             setDropDownMenuOpen(false)
             return
         }
-        const elements = document.getElementById('overlay')
-        if(elements !== null) {
-            elements.classList.toggle("hidden")
-        }
+        toggleOverlay()
     }
     const handleClickMenuIcon = () => {
         setDropDownMenuOpen(prevState => !prevState)
@@ -31,12 +42,24 @@ function NavBar({home}) {
             setIsCardOpen(false)
             return
         }
-        const elements = document.getElementById('overlay')
-        if(elements !== null) {
-            elements.classList.toggle("hidden")
-        }
-        
+        toggleOverlay()
     }
+    const  handleShopClick = () => {
+        setDropDownMenuOpen(false)
+        removeOverlay()
+    }
+    
+    useEffect(() => {
+        const closeCart = () => {
+            removeOverlay()
+            setIsCardOpen(false)
+            setDropDownMenuOpen(false)
+        }
+        const overlayEl = document.getElementById('overlay')
+        overlayEl.addEventListener("click", closeCart)
+        return overlayEl.addEventListener("click", closeCart)
+    },[])
+
     return (
         <nav className={`${home?"":"bg-black"} z-[200]`}>
                 <div className={`flex flex-row w-full items-center justify-between 
@@ -61,18 +84,21 @@ function NavBar({home}) {
                     <div className='justify-center gap-8 hidden lg:flex flex-1 -ml-[143px]'> {/* 143px is audiophile logo width */}
                         <NavigationLink/>
                     </div>
-                    <div className="relative">
+                    { !isCheckoutPage && <div className="relative">
                         <FiShoppingCart 
                             size={24} 
                             color='white' 
                             className='hover:stroke-orange cursor-pointer'
                             onClick={toggleCardOpen}
                         />
-                        {isCartOpen && <Cart cartItems={[{name: "item 1"},{name: "item 2"}, {name: "item 2"}]}/>}
-                    </div>
+                        {itemsNumber > 0 && <div className="bg-orange absolute w-6 h-6 rounded-full top-[-14px] right-[-11px] flex justify-center items-center">
+                            <div className="text-sm font-bold text-white">{itemsNumber}</div>
+                        </div>}
+                        {isCartOpen && <Cart/>}
+                    </div>}
                     
                 </div>
-                {isDropdownMenuOpen && <CategoryCardList classname='absolute top-[6rem] px-6 z-[200] pb-20'/>}
+                {isDropdownMenuOpen && <CategoryCardList classname='absolute top-[6rem] px-6 z-[200] pb-20' handleClick={handleShopClick}/>}
             </nav>
     )
 }

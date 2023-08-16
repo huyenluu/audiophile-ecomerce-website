@@ -1,7 +1,6 @@
 import NavBar from './NavBar'
 
 function Header({category}) {
-
         return (
             <header className='bg-black'>
                 <NavBar />

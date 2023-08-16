@@ -6,10 +6,8 @@ import { ButtonDefault } from "../../ui/Buttons"
 import { generateProductUrlbasedOnSlug } from "../../utilities/utilities"
 //import { useEffect } from "react"
 
-//to-do: add link to see product btn
-//to-do: image-galery, other products suggestion
+
 //to-do: split features text in 2 paragrafs
-//to-do: check if scroll to top works in all situation
 function ProductDetails() {
     const [product] = useLoaderData()
     const navigate = useNavigate()

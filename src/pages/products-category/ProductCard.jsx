@@ -1,14 +1,30 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom"
 import Image from "../../ui/Image"
 import {ButtonDefault} from "../../ui/Buttons"
-import Counter from "../../components/Counter";
+import Counter from "../../components/Counter"
+import { useDispatch } from "react-redux"
+import { addItem } from "../../redux/cartSlice"
 
 //to-do: add a function to split product name in 2 lines name/category name
-function ProductCard({data, index, showPrice, handleClickBtnAdd}) {
+function ProductCard({data, index, showPrice}) {
     let location = useLocation()
-    const getCounter = (counter) => {
-        console.log(counter)
+    const dispatch = useDispatch();
+    let payload = {
+        id: data.id,
+        name: data.name,
+        price: data.price,
+        image: data.image.mobile,
+        quantity: 1,
+        totalPrice: data.price * 1,
     }
+    const onCounterChange = (value) => {
+        payload = {
+            ...payload,
+            quantity: value,
+            totalPrice: data.price * value,
+        }
+    }
+    
     return (
         <div className={`flex flex-col gap-6 w-full mt-16 mb-28
                         sm:mt-28
@@ -43,11 +59,12 @@ function ProductCard({data, index, showPrice, handleClickBtnAdd}) {
                     <div>
                         <div className="text-heading-6 mb-6">{`$${data.price}`}</div>
                         <div className="flex w-[18.5rem] justify-between items-center">
-                            <Counter getCounter={getCounter}/>
+                            <Counter key="counter-from-product-page" onValueChange={onCounterChange}/>
                             <Link>
                                 <ButtonDefault 
-                                    content="add to card" 
+                                    content="add to cart" 
                                     className="bg-orange hover:bg-orange-lighter"
+                                   onClick={() => dispatch(addItem(payload))}
                                 />
                             </Link>
                         </div>

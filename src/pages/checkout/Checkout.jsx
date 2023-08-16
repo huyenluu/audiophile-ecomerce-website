@@ -2,20 +2,57 @@ import { Formik, Form } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../../ui/NavBar';
 import Footer from '../../ui/Footer';
-import { ButtonDefault } from '../../ui/Buttons';
+//import { ButtonDefault } from '../../ui/Buttons';
 import CustomInputFields from './CustomInputFields';
 import { useState } from 'react';
 import CheckoutConfirmationModal from '../../ui/CheckoutConfirmationModal';
 import Overlay from '../../ui/Overlay';
+import CartItem from '../../components/cart/CartItem';
+import * as Yup from 'yup';
+import { addClientToDb } from '../../services/apiClients';
+import { addOrderToDb } from '../../services/apiOrders';
+import Error from '../../ui/Error';
+import Loader from '../../ui/Loader';
+import { useSelector } from 'react-redux';
+import { getCart, getTotalCartPrice, shippingFee, vatPercentage } from '../../redux/cartSlice';
+
+
+const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
+const validationSchema = Yup.object().shape({
+    name: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
+    email: Yup.string().email('Invalid email').required('Required').required('Required'),
+    phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid'),
+    address: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
+    zipcode:Yup.string().required().matches(/^[0-9]+$/, "Must be only digits").test('len', 'Must be exactly 5 characters', val => val.length === 5),
+    city: Yup.string().required('Required'),
+    country:Yup.string().required('Required'),
+
+});
 
 const Checkout = () => {
     const [isModalOpen, setModalOpen] = useState(false)
+    const [error, setError] = useState(null)
+    const [orderId, setOrderId] = useState(null)
     const navigate = useNavigate()
-    const cartItems=[
-        {name: "XX99 MK II", quantity: 1, price: 100, image: "./assets/product-yx1-earphones/mobile/image-category-page-preview.jpg"},
-        {name: "XX59", quantity: 2, price: 100, image: "./assets/product-yx1-earphones/mobile/image-category-page-preview.jpg"}, 
-        {name: "YX1", quantity: 3, price: 100, image: "./assets/product-yx1-earphones/mobile/image-category-page-preview.jpg"}
-    ]
+    const cartItems = useSelector(getCart)
+    const totalPrice = useSelector(getTotalCartPrice)
+    const vatValue = Math.round(totalPrice * vatPercentage)
+    const grandTotal = totalPrice + shippingFee
+    
+    const initialValues={ 
+        name: '',
+        email: '', 
+        phoneNumber: '',
+        address:'',
+        zipcode:'',
+        city:'',
+        country:'',
+        paymentType:'',
+        emoneyNumber:'',
+        emoneyPin:'',
+    }
+
     const toggleCardOpen = () => {
         setModalOpen(prevState => !prevState)
         const elements = document.getElementById('overlay')
@@ -23,12 +60,37 @@ const Checkout = () => {
             elements.classList.toggle("hidden")
         }
     }
+    const handleOnSubmit = async (values, { setSubmitting }) => {
+        const [clientData, orderData] = prepareDataForPostRequest(values)
+        const [dataClient,errorClient]  = await addClientToDb([clientData])
+        if(errorClient) {
+            console.log(errorClient)
+            setError(errorClient)
+        } else {
+            const clientId = dataClient[0].id
+            const [dataOrder, errorOrder] = await addOrderToDb([{...orderData, clientId}])
+            if (errorOrder) {
+                setError(errorOrder)
+            }else if(dataOrder[0].id) {
+                setOrderId(dataOrder[0].id)
+                toggleCardOpen()
+            }
+        }
+    }
+    const prepareDataForPostRequest = (values) => {
+        const {name, email, phoneNumber, address, zipcode, city, country, paymentType} = values
+        const clientData = {name,email,phoneNumber,address,zipcode,city,country}
+        const orderData = {paymentType,shippingFee,vatValue,grandTotal}
+        return [clientData, orderData]
+    }
+
     return(
         <div className='relative'>
             <Overlay/>
             <NavBar />
-            {isModalOpen && <CheckoutConfirmationModal cartItems={cartItems} itemsNo={cartItems.length} grandTotal={0}/>}
-            <div className='relative container w-screen'>
+            {error && <Error error={error.data || error.message}/>}
+            {isModalOpen && <CheckoutConfirmationModal cartItems={cartItems} itemsNo={cartItems.length} grandTotal={grandTotal} orderId={orderId}/>}
+            {!error && <div className='relative container w-screen'>
                 <button 
                     onClick={() => {
                         navigate(-1)
@@ -37,28 +99,12 @@ const Checkout = () => {
                 >
                     Go back
                 </button>
-                <div className='rounded-lg sm:p-6 bg-white lg:max-w-[45.6rem] lg:px-12 mb-24'>
+                <div className='rounded-lg p-6 bg-white lg:max-w-[42.6rem] lg:p-12 mb-24'>
                     <h1 className='text-heading-4 uppercase sm:text-heading-3 mb-8'>checkout</h1>
                     <Formik
-                        initialValues={{ email: '', password: '' }}
-                        validate={values => {
-                            const errors = {};
-                            if (!values.email) {
-                                errors.email = 'Required';
-                            } else if (
-                                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-                            ) {
-                                errors.email = 'Invalid email address';
-                            }
-                            return errors;
-                        }}
-        
-                        onSubmit={(values, { setSubmitting }) => {
-                            setTimeout(() => {
-                                alert(JSON.stringify(values, null, 2));
-                                setSubmitting(false);
-                            }, 400);
-                        }}
+                        initialValues={initialValues}
+                        validationSchema={validationSchema}
+                        onSubmit = {handleOnSubmit}
                     >
                         {({ isSubmitting }) => (
                             <Form>
@@ -68,20 +114,20 @@ const Checkout = () => {
                                         type="name" 
                                         name="name"
                                         placeholder='Alexei Ward'
-                                        required
+
                                     />
                                     <CustomInputFields
                                         type="email" 
                                         name="email" 
                                         placeholder="alexei@mail.com"
-                                        required
+
                                     />
                                     <CustomInputFields
                                         type="phone" 
-                                        name="phone"
+                                        name="phoneNumber"
                                         label="phone number" 
                                         placeholder="+1(202)555-0136"
-                                        required
+
                                     />
                                 </div>
                                 <div className='text-orange text-subtitile uppercase mb-4'>Shipping info</div>
@@ -91,28 +137,28 @@ const Checkout = () => {
                                         name="address"
                                         label="Your Address" 
                                         placeholder="1137 Williams Avenue"
-                                        required
+
                                     />
                                     <CustomInputFields
                                         // type="number"
                                         type="text" 
                                         pattern="[0-9]*" 
-                                        name="ziocode"
+                                        name="zipcode"
                                         label="zip code" 
                                         placeholder="10001"
-                                        required
+
                                     />
                                     <CustomInputFields
                                         type="text" 
                                         name="city"
                                         placeholder="new york"
-                                        required
+
                                     />
                                     <CustomInputFields
                                         type="text" 
                                         name="country"
                                         placeholder="United States"
-                                        required
+
                                     />
                                 </div>
                                 
@@ -121,12 +167,11 @@ const Checkout = () => {
                                 <fieldset 
                                     role="group" 
                                     aria-labelledby="my-radio-group"
-                                    required
                                     className='flex flex-col w-full gap-y-6 sm:flex-row sm:flex-wrap justify-between'>
                                     <label className='text-sm font-bold capitalize w-full'>Payment Method</label>
                                     <CustomInputFields
                                         type="radio"
-                                        name="payment"
+                                        name="paymentType"
                                         value="e-money"
                                         id="e-money"
                                         className="inline-block mr-4 peer"
@@ -140,7 +185,7 @@ const Checkout = () => {
                                     />
                                     <CustomInputFields
                                         type="radio"
-                                        name="payment"
+                                        name="paymentType"
                                         value="cash on delivery"
                                         id="cash-on-delivery"
                                         className="inline-block mr-4"
@@ -189,57 +234,54 @@ const Checkout = () => {
                                 </fieldset>
                                 <div className="bg-white rounded-lg w-full text-black py-8
                                                 flex flex-col gap-6
-                                                lg:absolute top-16 right-0 lg:w-[21.8rem] lg:px-8 max-w-lg m-auto">
+                                                lg:absolute top-16 right-0 max-w-[21.8rem] lg:px-8 m-auto">
                                     <div className="text-heading-6 uppercase">
                                         summary
                                     </div>
                                     <ul className='flex flex-col'>
                                         {cartItems.map(item => (
-                                            <li key={item.name} className="flex justify-between items-center mb-8">
-                                                <img
-                                                    src={item.image}
-                                                    alt={item.name}
-                                                    className='w-16 h-16 rounded-lg'
-                                                />
-                                                <div className='flex flex-col items-start flex-1 ml-6'>
-                                                    <div className='text-p font-bold uppercase'>{item.name}</div>
-                                                    <div className='text-button opacity-50'>${item.price}</div>
-                                                </div>
-                                                <div className='text-p font-bold opacity-50'>x{item.quantity}</div>
-                                            </li>
+                                            <CartItem key={item.name} item={item}/>
                                         ))}
                                     </ul>
                                     <div>
                                         <div className="flex justify-between items-center mb-2">
                                             <div className="text-p uppercase opacity-50">Total</div>
-                                            <div className="text-heading-6">$0</div>
+                                            <div className="text-heading-6">${totalPrice}</div>
                                         </div>
                                         <div className="flex justify-between items-center mb-2">
                                             <div className="text-p uppercase opacity-50">shipping</div>
-                                            <div className="text-heading-6">$0</div>
+                                            <div className="text-heading-6">${shippingFee}</div>
                                         </div>
                                         <div className="flex justify-between items-center mb-6">
                                             <div className="text-p uppercase opacity-50">vat(included)</div>
-                                            <div className="text-heading-6">$0</div>
+                                            <div className="text-heading-6">${vatValue}</div>
                                         </div>
                                         <div className="flex justify-between items-center">
                                             <div className="text-p uppercase opacity-50">grand total</div>
-                                            <div className="text-heading-6 text-orange">$0</div>
+                                            <div className="text-heading-6 text-orange">${grandTotal}</div>
                                         </div>
                                     </div>
-                                    <ButtonDefault
+                                    {/* <ButtonDefault
                                         type="submit" 
                                         disabled={isSubmitting}
                                         content="continue & pay"
                                         className="bg-orange hover:bg-orange-lighter w-full"
                                         handleClick={()=>toggleCardOpen()}
-                                    />
+                                    /> */}
+                                    <button
+                                        type='submit'
+                                        disabled={isSubmitting}
+                                        className="bg-orange hover:bg-orange-lighter w-full py-4 px-8 cursor-pointer color-transition-effect text-button uppercase text-white text-center disabled:bg-orange-lighter"
+                                        // onClick={()=>toggleCardOpen()}
+                                    >
+                                        {isSubmitting ? <Loader/>:'Continue & pay'}
+                                    </button>
                                 </div>
                             </Form>
                         )}
                     </Formik>
                 </div>
-            </div>
+            </div>}
             <Footer/>
         </div>
     );

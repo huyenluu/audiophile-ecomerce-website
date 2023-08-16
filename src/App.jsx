@@ -7,8 +7,7 @@ import AppLayout from "./ui/AppLayout"
 import Error from "./ui/Error"
 import { getProductsByCategory, getProductById } from './services/apiProducts'
 
-//to-do: handle error: Layout was forced before the page was fully loaded. If stylesheets are not yet loaded this may cause a flash of unstyled content.
-//to-do: handle error pages
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -40,7 +39,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/checkout',
-    element: <Checkout />,
+    element: <Checkout/>,
     errorElement:<Error/>
   }
 ])

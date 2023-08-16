@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { ButtonArrow } from './Buttons'
 
 export const  CATEGORY_MENU_ITEMS = [
@@ -20,7 +21,8 @@ export const  CATEGORY_MENU_ITEMS = [
 ]
 
 //to-do: add scroll animation
-function CategoryCardList({classname}) {
+function CategoryCardList({classname, handleClick}) {
+
     return(
         <div className={`${classname} rounded-br-lg rounded-bl-lg bg-white flex flex-col w-full z-[100] mb-16 sm:flex-row 
                 sm:gap-3 md:gap-6 lg:my-32`}>
@@ -34,11 +36,13 @@ function CategoryCardList({classname}) {
                             <div className="text-center text-sm font-bold tracking-[1.07] uppercase text-black">
                                 {item.name}
                             </div>
-                            <ButtonArrow
+                            <div onClick={handleClick}>
+                                <ButtonArrow
                                     content='Shop'
                                     link={item.path}
                                     moveToTop
-                            />
+                                />
+                            </div>
                         </div>
                         <img
                             src={item.image}

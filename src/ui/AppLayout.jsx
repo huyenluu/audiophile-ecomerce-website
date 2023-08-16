@@ -8,9 +8,10 @@ import BestGearSection from "./BestGearSection"
 function AppLayout() {
     const { categoryName } = useParams()
     const location = useLocation()
-    const isCategoryPage = location === `/category/${categoryName}`
+    const isCategoryPage = location.pathname === `/category/${categoryName}`
     const navigation = useNavigation();
     const isLoading = navigation.state === 'loading';
+
     return (
         <div className="flex flex-col">
             {isLoading && <Loader />}

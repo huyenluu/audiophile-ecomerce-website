@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { ButtonDefault } from "./Buttons"
 
-function CheckoutConfirmationModal({cartItems,itemsNo, grandTotal}) {
+function CheckoutConfirmationModal({cartItems,itemsNo, grandTotal, orderId}) {
     const firstItemArr = cartItems.slice(0,1)
     const [displayedItems, setDisplayedItems] = useState(firstItemArr)
     return (
@@ -12,7 +12,7 @@ function CheckoutConfirmationModal({cartItems,itemsNo, grandTotal}) {
                 className="w-16 h-16 fill-orange mb-6"
                 alt="order confirmation icon"
             />
-            <h1 className="text-heading-5 sm:text-heading-3 mb-4">THANK YOU FOR YOUR ORDER</h1>
+            <h1 className="text-heading-5 sm:text-heading-3 mb-4">Order #{orderId} has been inregistrated</h1>
             <p className="text-p opacity-50 sm:mb-8">You will receive an email confirmation shortly.</p>
             <div className="rounded-lg bg-white mb-6 sm:mb-12 sm:flex">
                 <div className="p-6 pb-0 sm:w-[60%]">
