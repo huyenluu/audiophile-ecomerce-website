@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useLocation, useOutlet } from 'react-router-dom';
+import { useOutlet } from 'react-router-dom';
 import { useState } from 'react';
 
 const AnimatedOutlet = () => {
@@ -10,16 +10,9 @@ const AnimatedOutlet = () => {
 };
 
 function RootContainer() {
-    const location = useLocation();
     return (
-        <AnimatePresence mode="wait">
-            <motion.div
-                key={location.pathname}
-                initial="hidden"
-                animate="visible"
-                exit={{ opacity: 0, transition: { duration: 0.5 } }}
-                variants={{ visible: { transition: { staggerChildren: 0.3 } } }}
-            >
+        <AnimatePresence>
+            <motion.div>
                 <AnimatedOutlet />
             </motion.div>
         </AnimatePresence>
