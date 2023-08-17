@@ -1,9 +1,10 @@
-
-
 function Overlay() {
     return (
-        <div id="overlay" className="absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.5)] z-[100] hidden"></div>
-    )
+        <div
+            id="overlay"
+            className="absolute left-0 top-0 z-[100] hidden h-full w-full bg-[rgba(0,0,0,0.5)]"
+        ></div>
+    );
 }
 
-export default Overlay
+export default Overlay;

@@ -1,23 +1,38 @@
-import Counter from "../Counter"
+import Counter from '../Counter';
 
-
-function CartItem({item, index, isCounterNeeded}) {
-    const imageUrl = item.image.substring(1)
+function CartItem({ item, index, isCounterNeeded }) {
+    const imageUrl = item.image.substring(1);
     return (
-        <li key={item.name+index} className="flex justify-between items-center mb-8 last:mb-2">
+        <li
+            key={item.name + index}
+            className="mb-8 flex items-center justify-between last:mb-2"
+        >
             <img
                 src={imageUrl}
                 alt={item.name}
-                className='w-16 h-16 rounded-lg'
+                className="h-16 w-16 rounded-lg"
             />
-            <div className='flex flex-col items-start flex-1 ml-4'>
-                <div className='text-p font-bold uppercase text-ellipsis whitespace-nowrap max-w-[60px] overflow-hidden sm:max-w-[120px]'>{item.name}</div>
-                <div className='text-button opacity-50'>${item.price}</div>
+            <div className="ml-4 flex flex-1 flex-col items-start">
+                <div className="max-w-[60px] overflow-hidden text-ellipsis whitespace-nowrap text-p font-bold uppercase sm:max-w-[120px]">
+                    {item.name}
+                </div>
+                <div className="text-button opacity-50">${item.price}</div>
             </div>
-            {!isCounterNeeded && <div className='text-p font-bold opacity-50'>x{item.quantity}</div>}
-            {isCounterNeeded && <Counter key={'counter-from-cart'} value={item.quantity} id={item.id} small/>}
+            {!isCounterNeeded && (
+                <div className="text-p font-bold opacity-50">
+                    x{item.quantity}
+                </div>
+            )}
+            {isCounterNeeded && (
+                <Counter
+                    key={'counter-from-cart'}
+                    value={item.quantity}
+                    id={item.id}
+                    small
+                />
+            )}
         </li>
-    )
+    );
 }
 
-export default CartItem
+export default CartItem;

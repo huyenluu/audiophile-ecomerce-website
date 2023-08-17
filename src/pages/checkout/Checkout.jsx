@@ -206,7 +206,10 @@ const Checkout = () => {
                                             placeholder="United States"
                                         />
                                     </div>
-                                    <PaymentDetails onChange={handlePaymentMethodChange} paymentMethod={paymentMethod} />
+                                    <PaymentDetails
+                                        onChange={handlePaymentMethodChange}
+                                        paymentMethod={paymentMethod}
+                                    />
                                     <div
                                         className="right-0 top-16 m-auto flex w-full
                                                 max-w-[21.8rem] flex-col gap-6
@@ -348,10 +351,7 @@ const EMoneyDetails = () => {
 
 const CashOnDeliveryDetails = () => {
     return (
-        <div
-            id="cash-on-delivery-details"
-            className="flex items-center gap-6"
-        >
+        <div id="cash-on-delivery-details" className="flex items-center gap-6">
             <img
                 src="/assets/checkout/icon-cash-on-delivery.svg"
                 alt="icon cash on delivery"

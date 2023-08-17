@@ -1,10 +1,10 @@
-import supabase from "./supabase";
+import supabase from './supabase';
 
 export const addClientToDb = async (client) => {
     const { data, error } = await supabase
         .from('clients')
         .insert(client)
-        .select()
+        .select();
 
-    return [data, error]
-}
+    return [data, error];
+};

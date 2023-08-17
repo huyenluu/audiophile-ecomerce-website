@@ -1,17 +1,20 @@
-import NavBar from './NavBar'
+import NavBar from './NavBar';
 
-function Header({category}) {
-        return (
-            <header className='bg-black'>
-                <NavBar />
-                {category && <h1 className='text-heading-4 text-white uppercase my-8 text-center
-                                sm:text-heading-2 sm:my-16
-                                lg:my-24'
+function Header({ category }) {
+    return (
+        <header className="bg-black">
+            <NavBar />
+            {category && (
+                <h1
+                    className="my-8 text-center text-heading-4 uppercase text-white
+                                sm:my-16 sm:text-heading-2
+                                lg:my-24"
                 >
                     {category}
-                </h1>}
-            </header>
-        )
+                </h1>
+            )}
+        </header>
+    );
 }
 
-export default Header
+export default Header;

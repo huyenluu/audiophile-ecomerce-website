@@ -1,7 +1,7 @@
-import { configureStore } from "@reduxjs/toolkit"
-import cartReducer from "./cartSlice"
+import { configureStore } from '@reduxjs/toolkit';
+import cartReducer from './cartSlice';
 
-// const persistedState = localStorage.getItem('reduxState') 
+// const persistedState = localStorage.getItem('reduxState')
 //                        ? JSON.parse(localStorage.getItem('reduxState'))
 //                        : {}
 const store = configureStore({
@@ -9,11 +9,10 @@ const store = configureStore({
         cart: cartReducer,
     },
     //preloadedState: persistedState,
-})
+});
 
-store.subscribe(()=>{
-    console.log(store.getState())
-    localStorage.setItem('reduxState', JSON.stringify(store.getState()))
-})
+store.subscribe(() => {
+    localStorage.setItem('reduxState', JSON.stringify(store.getState()));
+});
 
-export default store
+export default store;

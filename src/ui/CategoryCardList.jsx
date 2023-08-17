@@ -1,44 +1,43 @@
-import { useEffect } from 'react'
-import { ButtonArrow } from './Buttons'
+import { ButtonArrow } from './Buttons';
 
-export const  CATEGORY_MENU_ITEMS = [
-    { 
+export const CATEGORY_MENU_ITEMS = [
+    {
         name: 'headphones',
         path: '/category/headphones',
-        image: '/assets/shared/desktop/image-category-thumbnail-headphones.png'
-    
+        image: '/assets/shared/desktop/image-category-thumbnail-headphones.png',
     },
     {
         name: 'speakers',
         path: '/category/speakers',
-        image: '/assets/shared/desktop/image-category-thumbnail-speakers.png'
+        image: '/assets/shared/desktop/image-category-thumbnail-speakers.png',
     },
     {
         name: 'earphones',
         path: '/category/earphones',
-        image: '/assets/shared/desktop/image-category-thumbnail-earphones.png'
-    }
-]
+        image: '/assets/shared/desktop/image-category-thumbnail-earphones.png',
+    },
+];
 
-//to-do: add scroll animation
-function CategoryCardList({classname, handleClick}) {
-
-    return(
-        <div className={`${classname} rounded-br-lg rounded-bl-lg bg-white flex flex-col w-full z-[100] mb-16 sm:flex-row 
-                sm:gap-3 md:gap-6 lg:my-32`}>
-            {
-                CATEGORY_MENU_ITEMS.map((item) => {
-                    return(
-                    <div key={item.name} className="relative flex flex-col items-center mt-20
+function CategoryCardList({ classname, handleClick }) {
+    return (
+        <div
+            className={`${classname} z-[100] mb-16 flex w-full flex-col rounded-bl-lg rounded-br-lg bg-white sm:flex-row 
+                sm:gap-3 md:gap-6 lg:my-32`}
+        >
+            {CATEGORY_MENU_ITEMS.map((item) => {
+                return (
+                    <div
+                        key={item.name}
+                        className="relative mt-20 flex flex-col items-center
                                     sm:w-1/3 lg:mt-[unset]"
                     >
-                        <div className="w-full h-40 bg-grey-white flex flex-col justify-end gap-4 items-center py-5 rounded-lg">
-                            <div className="text-center text-sm font-bold tracking-[1.07] uppercase text-black">
+                        <div className="flex h-40 w-full flex-col items-center justify-end gap-4 rounded-lg bg-grey-white py-5">
+                            <div className="text-center text-sm font-bold uppercase tracking-[1.07] text-black">
                                 {item.name}
                             </div>
                             <div onClick={handleClick}>
                                 <ButtonArrow
-                                    content='Shop'
+                                    content="Shop"
                                     link={item.path}
                                     moveToTop
                                 />
@@ -46,15 +45,15 @@ function CategoryCardList({classname, handleClick}) {
                         </div>
                         <img
                             src={item.image}
-                            className="min-h-0 min-w-0 w-32 h-auto shrink-0 absolute -top-8 left-1/2 -translate-x-1/2
+                            className="absolute -top-8 left-1/2 h-auto min-h-0 w-32 min-w-0 shrink-0 -translate-x-1/2
                             md:w-[7.68rem]"
-                            alt='menu item'
+                            alt="menu item"
                         />
                     </div>
-                )})
-            }
+                );
+            })}
         </div>
-    )
+    );
 }
 
-export default CategoryCardList
+export default CategoryCardList;
