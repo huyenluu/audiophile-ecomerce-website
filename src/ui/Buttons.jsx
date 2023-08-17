@@ -21,6 +21,7 @@ export const ButtonDefault = ({
     link,
     onClick,
     moveToTop,
+    children,
     ...props
 }) => {
     return link ? (
@@ -33,7 +34,7 @@ export const ButtonDefault = ({
                 className={`${className} color-transition-effect w-fit cursor-pointer px-8 py-4`}
             >
                 <div className="whitespace-nowrap text-center text-button uppercase text-white">
-                    {content}
+                    {content ? content : children}
                 </div>
             </div>
         </Link>
@@ -44,7 +45,7 @@ export const ButtonDefault = ({
             {...props}
         >
             <div className="whitespace-nowrap text-center text-button uppercase text-white">
-                {content}
+                {content ? content : children}
             </div>
         </div>
     );
@@ -56,6 +57,7 @@ export const ButtonDefaultOutline = ({
     moveToTop,
     link,
     onClick,
+    children,
     ...props
 }) => {
     return link ? (
@@ -68,7 +70,7 @@ export const ButtonDefaultOutline = ({
                 className={`${className} color-transition-effect w-fit cursor-pointer border border-black px-8 py-4 hover:bg-gray-700`}
             >
                 <div className="whitespace-nowrap text-center text-button uppercase">
-                    {content}
+                    {content ? content : children}
                 </div>
             </div>
         </Link>
@@ -78,8 +80,8 @@ export const ButtonDefaultOutline = ({
             onClick={() => handleOnClick(moveToTop, onClick)}
             {...props}
         >
-            <div className="whitespace-nowrap text-center text-button uppercase">
-                {content}
+            <div className="text-center text-button uppercase">
+                {content ? content : children}
             </div>
         </div>
     );

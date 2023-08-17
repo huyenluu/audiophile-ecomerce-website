@@ -1,14 +1,12 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Image from '../../ui/Image';
 import { ButtonDefault } from '../../ui/Buttons';
 import Counter from '../../components/Counter';
-import { useDispatch } from 'react-redux';
-import { addItem } from '../../redux/cartSlice';
+import AddToCartButton from '../../components/AddToCart';
 
 //to-do: add a function to split product name in 2 lines name/category name
 function ProductCard({ data, index, showPrice }) {
     let location = useLocation();
-    const dispatch = useDispatch();
     let payload = {
         id: data.id,
         name: data.name,
@@ -87,13 +85,7 @@ function ProductCard({ data, index, showPrice }) {
                                 key="counter-from-product-page"
                                 onValueChange={onCounterChange}
                             />
-                            <Link>
-                                <ButtonDefault
-                                    content="add to cart"
-                                    className="bg-orange hover:bg-orange-lighter"
-                                    onClick={() => dispatch(addItem(payload))}
-                                />
-                            </Link>
+                            <AddToCartButton payload={payload}/>
                         </div>
                     </div>
                 )}
