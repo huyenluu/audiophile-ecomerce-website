@@ -1,77 +1,103 @@
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom';
 
 const handleMoveToTop = (moveToTop) => {
-    if(!moveToTop) {
-        return
-    }else {
+    if (moveToTop) {
         window.scrollTo({
             top: 0,
             left: 0,
-            behavior: 'smooth'
-          });
+            behavior: 'smooth',
+        });
     }
-}
-// className must have bg-color/hover:bg-color otherwise this button is white
-export const ButtonDefault = ({content, className, link, onClick, moveToTop, ...props}) => {
-    return(
-        link  ? (
-            <Link to={link} onClick={()=>{handleMoveToTop(moveToTop)}} {...props} >
-                <div className={`${className} py-4 px-8 w-fit cursor-pointer color-transition-effect`}>
-                    <div className="whitespace-nowrap text-button uppercase text-white text-center">
-                        {content}
-                    </div>
-                </div>
-            </Link>
-        ) : (
-            <div
-                className={`${className} py-4 px-8 w-fit cursor-pointer color-transition-effect`} 
-                onClick={onClick}
-                {...props}
-            >
-                <div className="whitespace-nowrap text-button uppercase text-white text-center">
-                    {content}
-                </div>
-            </div>
-        )
-    )
-}
-export const ButtonDefaultOutline = ({content, className, moveToTop, link, onClick, ...props}) => {
-    return(
-        link ? (
-            <Link to={link} onClick={()=>{handleMoveToTop(moveToTop)}} {...props}>
-                <div className={`${className} py-4 px-8 w-fit cursor-pointer border border-black hover:bg-gray-700 color-transition-effect`}>
-                    <div className="whitespace-nowrap text-button uppercase text-center">
-                        {content}
-                    </div>
-                </div>
-            </Link>
-        ) : (
-            <div 
-                className={`${className} py-4 px-8 w-fit cursor-pointer border border-black hover:bg-gray-700 color-transition-effect`}
-                onClick={onClick}
-                {...props}
-            >
-                <div className="whitespace-nowrap text-button uppercase text-center">
-                    {content}
-                </div>
-            </div>
-        )
-    )
-}
+};
 
-export const ButtonArrow = ({content, moveToTop, link, ...props}) => {
+const handleOnClick = (moveToTop, onClick) => {
+    handleMoveToTop(moveToTop);
+    if (onClick) onClick();
+};
+
+export const ButtonDefault = ({
+    content,
+    className,
+    link,
+    onClick,
+    moveToTop,
+    ...props
+}) => {
+    return link ? (
+        <Link
+            to={link}
+            onClick={() => handleOnClick(moveToTop, onClick)}
+            {...props}
+        >
+            <div
+                className={`${className} color-transition-effect w-fit cursor-pointer px-8 py-4`}
+            >
+                <div className="whitespace-nowrap text-center text-button uppercase text-white">
+                    {content}
+                </div>
+            </div>
+        </Link>
+    ) : (
+        <div
+            className={`${className} color-transition-effect w-fit cursor-pointer px-8 py-4`}
+            onClick={() => handleOnClick(moveToTop, onClick)}
+            {...props}
+        >
+            <div className="whitespace-nowrap text-center text-button uppercase text-white">
+                {content}
+            </div>
+        </div>
+    );
+};
+
+export const ButtonDefaultOutline = ({
+    content,
+    className,
+    moveToTop,
+    link,
+    onClick,
+    ...props
+}) => {
+    return link ? (
+        <Link
+            to={link}
+            onClick={() => handleOnClick(moveToTop, onClick)}
+            {...props}
+        >
+            <div
+                className={`${className} color-transition-effect w-fit cursor-pointer border border-black px-8 py-4 hover:bg-gray-700`}
+            >
+                <div className="whitespace-nowrap text-center text-button uppercase">
+                    {content}
+                </div>
+            </div>
+        </Link>
+    ) : (
+        <div
+            className={`${className} color-transition-effect w-fit cursor-pointer border border-black px-8 py-4 hover:bg-gray-700`}
+            onClick={() => handleOnClick(moveToTop, onClick)}
+            {...props}
+        >
+            <div className="whitespace-nowrap text-center text-button uppercase">
+                {content}
+            </div>
+        </div>
+    );
+};
+
+export const ButtonArrow = ({ content, moveToTop, link, ...props }) => {
     return (
-        <Link to={link} onClick={()=>{handleMoveToTop(moveToTop)}} {...props}>
-            <div className="flex flex-row gap-3 w-16 items-center cursor-pointer">
-                <div className="text-sm font-bold tracking-[1] uppercase text-gray-500 hover:text-orange">
+        <Link to={link} onClick={() => handleOnClick(moveToTop)} {...props}>
+            <div className="flex w-16 cursor-pointer flex-row items-center gap-3">
+                <div className="text-sm font-bold uppercase tracking-[1] text-gray-500 hover:text-orange">
                     {content}
                 </div>
                 <img
                     src="/assets/shared/desktop/icon-arrow-right.svg"
-                    className="w-[5px] h-[10px]"
+                    className="h-[10px] w-[5px]"
                     alt="arrow-icon"
                 />
             </div>
         </Link>
-    )
-}
+    );
+};
