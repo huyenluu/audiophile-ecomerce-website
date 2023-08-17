@@ -40,11 +40,11 @@ export const ButtonDefault = ({
         </Link>
     ) : (
         <div
-            className={`${className} color-transition-effect w-fit cursor-pointer px-8 py-4`}
+            className={`${className} color-transition-effect cursor-pointer px-8 py-4`}
             onClick={() => handleOnClick(moveToTop, onClick)}
             {...props}
         >
-            <div className="whitespace-nowrap text-center text-button uppercase text-white">
+            <div className="text-center text-button uppercase text-white">
                 {content ? content : children}
             </div>
         </div>
