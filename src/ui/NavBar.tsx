@@ -1,39 +1,31 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect , FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import CategoryCardList from './CategoryCardList';
 import { FiShoppingCart } from 'react-icons/fi';
+import CategoryCardList from './CategoryCardList';
 import NavigationLink from './NavigationLink';
 import Cart from '../components/cart/Cart';
-import { useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { getTotalCartQuantity } from '../redux/cartSlice';
+import { toggleOverlay, removeOverlay } from '../redux/uiSlice';
 
-//to-do: added animation on menu card dropdown
-//to-do: added page transition animation
-
-function NavBar({ home }) {
-    const [isDropdownMenuOpen, setDropDownMenuOpen] = useState(false);
-    const [isCartOpen, setIsCardOpen] = useState(false);
+type NavBarProps = {
+    home?:boolean
+}
+const NavBar: FC<NavBarProps> = ({ home }) => {
+    const [isDropdownMenuOpen, setDropDownMenuOpen] = useState<boolean>(false);
+    const [isCartOpen, setIsCardOpen] = useState<boolean>(false);
     const location = useLocation();
-    const isCheckoutPage = location.pathname.includes('checkout');
-    const itemsNumber = useSelector(getTotalCartQuantity);
+    const isCheckoutPage:boolean = location.pathname.includes('checkout');
+    const itemsNumber:number = useAppSelector(getTotalCartQuantity);
+    const dispatch = useAppDispatch();
 
-    const toggleOverlay = () => {
-        const elements = document.getElementById('overlay');
-        if (elements !== null) {
-            elements.classList.toggle('hidden');
-        }
-    };
-    const removeOverlay = () => {
-        const elements = document.getElementById('overlay');
-        elements.classList.add('hidden');
-    };
     const toggleCardOpen = () => {
         setIsCardOpen((prevState) => !prevState);
         if (isDropdownMenuOpen === true) {
             setDropDownMenuOpen(false);
             return;
         }
-        toggleOverlay();
+        dispatch(toggleOverlay());
     };
     const handleClickMenuIcon = () => {
         setDropDownMenuOpen((prevState) => !prevState);
@@ -41,23 +33,29 @@ function NavBar({ home }) {
             setIsCardOpen(false);
             return;
         }
-        toggleOverlay();
+        dispatch(toggleOverlay());
     };
     const handleShopClick = () => {
         setDropDownMenuOpen(false);
-        removeOverlay();
+        dispatch(removeOverlay());
     };
 
     useEffect(() => {
         const closeCart = () => {
-            removeOverlay();
+            dispatch(removeOverlay());
             setIsCardOpen(false);
             setDropDownMenuOpen(false);
         };
         const overlayEl = document.getElementById('overlay');
-        overlayEl.addEventListener('click', closeCart);
-        return overlayEl.addEventListener('click', closeCart);
-    }, []);
+        console.log(overlayEl)
+        if(overlayEl) {
+            overlayEl.addEventListener('click', closeCart);
+            return () => {
+                overlayEl.removeEventListener('click', closeCart);
+            };
+        }
+       
+    }, [dispatch]);
 
     return (
         <nav className={`${home ? '' : 'bg-black'} z-[200]`}>
