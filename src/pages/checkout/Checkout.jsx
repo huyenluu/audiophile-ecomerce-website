@@ -4,8 +4,8 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
 import {
-    getCart,
-    getTotalCartPrice,
+    selectCart,
+    selectTotalCartPrice,
     shippingFee,
     vatPercentage,
 } from '../../redux/cartSlice';
@@ -65,8 +65,8 @@ const Checkout = () => {
     const [paymentMethod, setPaymentMethod] = useState(null);
     const [orderId, setOrderId] = useState(null);
     const navigate = useNavigate();
-    const cartItems = useSelector(getCart);
-    const totalPrice = useSelector(getTotalCartPrice);
+    const cartItems = useSelector(selectCart);
+    const totalPrice = useSelector(selectTotalCartPrice);
     const vatValue = Math.round(totalPrice * vatPercentage);
     const grandTotal = totalPrice + shippingFee;
 

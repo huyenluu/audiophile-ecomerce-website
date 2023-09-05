@@ -4,15 +4,15 @@ import CartItem from './CartItem';
 import { useSelector, useDispatch } from 'react-redux';
 import {
     clearCart,
-    getCart,
-    getTotalCartPrice,
-    getTotalCartQuantity,
+    selectCart,
+    selectTotalCartPrice,
+    selectTotalCartQuantity,
 } from '../../redux/cartSlice';
 
 function Cart() {
-    const cartItems = useSelector(getCart);
-    const totalPrice = useSelector(getTotalCartPrice);
-    const totalQuantity = useSelector(getTotalCartQuantity);
+    const cartItems = useSelector(selectCart);
+    const totalPrice = useSelector(selectTotalCartPrice);
+    const totalQuantity = useSelector(selectTotalCartQuantity);
     const dispatch = useDispatch();
 
     return cartItems.length > 0 ? (

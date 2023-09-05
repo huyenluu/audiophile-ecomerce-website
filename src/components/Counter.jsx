@@ -12,7 +12,7 @@ function Counter({ value, onValueChange, id, small }) {
         } else {
             dispatch(changeItemQuantity({ id, value: counter + 1 }));
         }
-        dispatch(changeItemQuantity({ id, value: value + 1 }));
+        //dispatch(changeItemQuantity({ id, value: value + 1 }));
     };
     const handleClickMinus = () => {
         if (!value && !id) {

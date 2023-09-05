@@ -6,8 +6,8 @@ import { IoMdCheckmark } from 'react-icons/io';
 import { ButtonDefault } from '../ui/Buttons';
 
 function AddToCartButton({ payload }) {
+    console.log(payload)
     const dispatch = useDispatch();
-
     const [showSuccess, setShowSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
 

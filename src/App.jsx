@@ -5,7 +5,6 @@ import Checkout from './pages/checkout/Checkout';
 import ProductDetails from './pages/product-details/ProductDetails';
 import AppLayout from './ui/AppLayout';
 import Error from './ui/Error';
-// import RootContainer from './ui/RootContainer';
 import { getProductsByCategory, getProductById } from './services/apiProducts';
 
 const router = createBrowserRouter([

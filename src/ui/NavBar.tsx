@@ -5,7 +5,7 @@ import CategoryCardList from './CategoryCardList';
 import NavigationLink from './NavigationLink';
 import Cart from '../components/cart/Cart';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { getTotalCartQuantity } from '../redux/cartSlice';
+import { selectTotalCartQuantity } from '../redux/cartSlice';
 import { toggleOverlay, removeOverlay } from '../redux/uiSlice';
 
 type NavBarProps = {
@@ -16,7 +16,7 @@ const NavBar: FC<NavBarProps> = ({ home }) => {
     const [isCartOpen, setIsCardOpen] = useState<boolean>(false);
     const location = useLocation();
     const isCheckoutPage:boolean = location.pathname.includes('checkout');
-    const itemsNumber:number = useAppSelector(getTotalCartQuantity);
+    const itemsNumber:number = useAppSelector(selectTotalCartQuantity);
     const dispatch = useAppDispatch();
 
     const toggleCardOpen = () => {
@@ -47,7 +47,6 @@ const NavBar: FC<NavBarProps> = ({ home }) => {
             setDropDownMenuOpen(false);
         };
         const overlayEl = document.getElementById('overlay');
-        console.log(overlayEl)
         if(overlayEl) {
             overlayEl.addEventListener('click', closeCart);
             return () => {

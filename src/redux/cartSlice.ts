@@ -1,34 +1,47 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { RootState } from './store';
 
 // cart constants
 export const shippingFee = 20;
 export const vatPercentage = 0.1;
 
+type CartPayloadType = {
+    id: number;
+    name: string;
+    price:number;
+    image: string;
+    quantity: number;
+    totalPrice: number;
+}
+type CartState = {
+    cartItems : CartPayloadType[];
+}
+type DeleteItemAction = {
+    payload: number;
+};
+type ChangeItemQuantityAction = {
+    payload: {
+        id: number;
+        value: number;
+    };
+};
+
 // get cart state from localStorage if exist
 const storedValue = localStorage.getItem('reduxState');
-const initialState = () =>
-    storedValue ? JSON.parse(storedValue).cart : { cartItems: [] };
+const initialState: CartState = storedValue ? JSON.parse(storedValue).cart : { cartItems: [] };
 
 const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-        addItem(state, action) {
-            // action.payload = {
-            //     id: data.id,
-            //     name: data.name,
-            //     price: data.price,
-            //     image: data.image.mobile,
-            //     quantity: 1,
-            //     totalPrice: data.price * 1,
-            // }
+        addItem(state, action:{payload: CartPayloadType}) {
 
             const existingCartItem = state.cartItems.find(
                 (item) => item.id === action.payload.id
             );
             if (existingCartItem) {
                 // If the item already exists in the cart, update its quantity and totalPrice
-                existingCartItem.quantity += 1;
+                existingCartItem.quantity += action.payload.quantity;
                 existingCartItem.totalPrice =
                     existingCartItem.price * existingCartItem.quantity;
             } else {
@@ -36,13 +49,12 @@ const cartSlice = createSlice({
                 state.cartItems.push(action.payload);
             }
         },
-        deleteItem(state, action) {
-            // id = action.payload
+        deleteItem(state, action:DeleteItemAction) {
             state.cartItems = state.cartItems.filter(
                 (item) => item.id !== action.payload
             );
         },
-        changeItemQuantity(state, action) {
+        changeItemQuantity(state, action:ChangeItemQuantityAction) {
             const { id, value } = action.payload;
             const updatedItems = state.cartItems.map((item) => {
                 if (item.id === id) {
@@ -65,12 +77,12 @@ const cartSlice = createSlice({
 export const { addItem, deleteItem, changeItemQuantity, clearCart } =
     cartSlice.actions;
 
-export const getCart = (state) => state.cart.cartItems;
+export const selectCart = (state:RootState) => state.cart.cartItems;
 
-export const getTotalCartQuantity = (state) =>
+export const selectTotalCartQuantity = (state:RootState):number =>
     state.cart.cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
-export const getTotalCartPrice = (state) =>
+export const selectTotalCartPrice = (state:RootState):number =>
     state.cart.cartItems.reduce((sum, item) => sum + item.totalPrice, 0);
 
 export default cartSlice.reducer;
