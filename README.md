@@ -2,6 +2,8 @@
 
 Welcome to Audiophile E-Shop, a modern e-commerce platform built to provide an exceptional shopping experience. This project leverages the latest web technologies to ensure performance, scalability, and maintainability.
 
+[Live Demo](https://audiophile-ecomerce-website-puce.vercel.app/)
+
 ## Features
 
 - **State Management**: Integrated with `@reduxjs/toolkit` and `react-redux` for efficient state management.
@@ -12,9 +14,9 @@ Welcome to Audiophile E-Shop, a modern e-commerce platform built to provide an e
 - **Icons**: Uses `react-icons` for a diverse set of icons.
 
 ## Technologies Used
-- **Core**: Next.js, React
+- **Core**: React, Vite, TypeScript
 - **Styling**: TailwindCSS
-- **Utilities**: date-fns, formik, react-icons, sharp
+- **Linting & Formatting**: ESLint, Prettier
 
 ## Getting Started
 
@@ -26,10 +28,10 @@ Welcome to Audiophile E-Shop, a modern e-commerce platform built to provide an e
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/huyenluu/porfolio-v1.git](https://github.com/huyenluu/audiophile-ecomerce-website.git
-   cd porfolio-v1
+   git clone https://github.com/huyenluu/audiophile-ecommerce-website.git 
+   cd audiophile-ecommerce-website
    npm install
-2. Running the Portfolio Locally
+2. Running the project locally
    ```bash
     npm run dev
    
