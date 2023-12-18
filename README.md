@@ -1,8 +1,49 @@
-# React + Vite
+# Audiophile E-Shop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to Audiophile E-Shop, a modern e-commerce platform built to provide an exceptional shopping experience. This project leverages the latest web technologies to ensure performance, scalability, and maintainability.
 
-Currently, two official plugins are available:
+[Live Demo](https://audiophile-ecomerce-website-puce.vercel.app/)
 
--   [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
--   [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+
+- **State Management**: Integrated with `@reduxjs/toolkit` and `react-redux` for efficient state management.
+- **Database Integration**: Uses `@supabase/supabase-js` for seamless database operations.
+- **Form Handling**: Utilizes `formik` and `yup` for form validation and management.
+- **Routing**: Implemented with `react-router-dom` for intuitive page navigation.
+- **Animations**: Enhanced user experience with `framer-motion` animations.
+- **Icons**: Uses `react-icons` for a diverse set of icons.
+
+## Technologies Used
+- **Core**: React, Vite, TypeScript
+- **Styling**: TailwindCSS
+- **Linting & Formatting**: ESLint, Prettier
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js, npm, and TypeScript installed on your machine.
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/huyenluu/audiophile-ecommerce-website.git 
+   cd audiophile-ecommerce-website
+   npm install
+2. Running the project locally
+   ```bash
+    npm run dev
+   
+   # Open your browser and navigate to http://localhost:3000.
+   
+3. Building for Production
+  ```bash
+    # To create a production build, run:
+    npm run build
+    # After building, you can start the production server with:
+    npm run start
+   ```
+
+## Contributing
+Contributions, issues, and feature requests are welcome! Feel free to open an issue or submit a pull request.
