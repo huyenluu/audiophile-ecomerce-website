@@ -1,14 +1,21 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { ButtonDefault } from './Buttons';
 import { useDispatch } from 'react-redux';
 import { clearCart } from '../redux/cartSlice';
+import { CartPayloadType } from '../redux/cartSlice';
 
+type CheckoutConfirmationModalProps = {
+    cartItems: Array<CartPayloadType>;
+    itemsNo: number;
+    grandTotal: number;
+    orderId: number;
+}
 function CheckoutConfirmationModal({
     cartItems,
     itemsNo,
     grandTotal,
     orderId,
-}) {
+}:CheckoutConfirmationModalProps) {
     const firstItemArr = cartItems.slice(0, 1);
     const [displayedItems, setDisplayedItems] = useState(firstItemArr);
     const dispatch = useDispatch();
@@ -31,7 +38,7 @@ function CheckoutConfirmationModal({
             <div className="mb-6 rounded-lg bg-white sm:mb-12 sm:flex">
                 <div className="p-6 pb-0 sm:w-[60%]">
                     <div
-                        className={itemsNo > 1 && 'border-b border-b-gray-300'}
+                        className={itemsNo > 1 ? 'border-b border-b-gray-300' : ''}
                     >
                         {displayedItems.map((item) => (
                             <li

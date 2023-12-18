@@ -1,8 +1,8 @@
-import React, { FC } from "react";
+import React from "react";
 import { useAppSelector } from "../redux/hooks";
 import { selectIsOverlayHidden } from "../redux/uiSlice";
 
-const Overlay: FC = () => {
+function Overlay () {
     const isOverlayHidden = useAppSelector(selectIsOverlayHidden);
     return (
         <div

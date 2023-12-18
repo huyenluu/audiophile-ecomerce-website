@@ -5,7 +5,7 @@ import { RootState } from './store';
 export const shippingFee = 20;
 export const vatPercentage = 0.1;
 
-type CartPayloadType = {
+export type CartPayloadType = {
     id: number;
     name: string;
     price:number;

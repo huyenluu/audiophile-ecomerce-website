@@ -1,3 +1,4 @@
+import React from 'react';
 import {
     Outlet,
     useLocation,
@@ -10,20 +11,24 @@ import Overlay from './Overlay';
 import Loader from './Loader';
 import BestGearSection from './BestGearSection';
 
-function AppLayout() {
-    const { categoryName } = useParams();
+interface AppLayoutProps {
+    categoryName?: string;
+}
+
+const AppLayout: React.FC<AppLayoutProps> = ({ categoryName }) => {
+    const { categoryName: paramsCategoryName } = useParams();
     const location = useLocation();
-    const isCategoryPage = location.pathname === `/category/${categoryName}`;
+    const isCategoryPage = location.pathname === `/category/${categoryName || paramsCategoryName}`;
     const navigation = useNavigation();
     const isLoading = navigation.state === 'loading';
 
     return (
         <div className="flex flex-col">
+            <Overlay />
             {isLoading && <Loader />}
-            {isCategoryPage && <Header category={categoryName} />}
+            {isCategoryPage && <Header category={categoryName || paramsCategoryName} />}
             {!isCategoryPage && <Header />}
             <main id="main" className="relative flex-grow">
-                <Overlay />
                 <Outlet />
                 <BestGearSection className="container" />
             </main>

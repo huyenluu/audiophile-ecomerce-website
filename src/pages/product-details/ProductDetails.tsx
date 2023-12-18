@@ -1,15 +1,16 @@
+import React from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import ProductCard from '../products-category/ProductCard';
 import CategoryCardList from '../../ui/CategoryCardList';
 import Image from '../../ui/Image';
 import { ButtonDefault } from '../../ui/Buttons';
 import { generateProductUrlbasedOnSlug } from '../../utilities/utilities';
-//import { useEffect } from "react"
+import { Product } from '../../types/product.type';
 
-//to-do: split features text in 2 paragrafs
+const ProductDetails: React.FC = () => {
 
-function ProductDetails() {
-    const [product] = useLoaderData() || [];
+    const data = useLoaderData() as Product[];
+    const product = data[0];
     const navigate = useNavigate();
     if (product === undefined) return null;
     return (
@@ -48,7 +49,7 @@ function ProductDetails() {
             </div>
             <div
                 className="mb-28 flex flex-col items-center justify-center gap-4
-                            sm:flex-row lg:gap-8"
+                                                        sm:flex-row lg:gap-8"
             >
                 <div className="flex flex-col items-center gap-4 sm:h-full lg:gap-8">
                     <Image

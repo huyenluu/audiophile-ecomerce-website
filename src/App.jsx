@@ -4,18 +4,18 @@ import ProductCategory from './pages/products-category/ProductsCategory';
 import Checkout from './pages/checkout/Checkout';
 import ProductDetails from './pages/product-details/ProductDetails';
 import AppLayout from './ui/AppLayout';
-import Error from './ui/Error';
+import ErrorPage from './ui/Error';
 import { getProductsByCategory, getProductById } from './services/apiProducts';
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <Home />,
-        errorElement: <Error />,
+        errorElement: <ErrorPage />,
     },
     {
         element: <AppLayout />,
-        errorElement: <Error />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: 'category/:categoryName',
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
                 loader: ({ params }) => {
                     return getProductsByCategory(params.categoryName);
                 },
-                errorElement: <Error />,
+                errorElement: <ErrorPage />,
             },
             {
                 path: 'category/:categoryName/:productSlug',
@@ -31,14 +31,14 @@ const router = createBrowserRouter([
                 loader: ({ params }) => {
                     return getProductById(params.productSlug);
                 },
-                errorElement: <Error />,
+                errorElement: <ErrorPage />,
             },
         ],
     },
     {
         path: '/checkout',
         element: <Checkout />,
-        errorElement: <Error />,
+        errorElement: <ErrorPage />,
     },
 ]);
 export default function App() {

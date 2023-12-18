@@ -1,18 +1,32 @@
+import React from 'react';
 import { useCallback, useEffect, useState } from 'react';
 
 // to-do: added loading image animation and blured image when load https://blog.webdevsimplified.com/2023-05/lazy-load-images/
-// props.width={mobile:value, tablet: value, desktop:value} value px
-function Image({ linkObj, className, alt }) {
+
+type ImageProps = {
+    linkObj: {
+        mobile: string;
+        tablet: string;
+        desktop: string;
+    };
+    className: string;
+    alt: string;
+}
+type State = {
+    imgSrc: string;
+}
+
+function Image({ linkObj, className, alt }: ImageProps) {
     const { mobile, tablet, desktop } = linkObj;
     const mobileSrc = mobile.substring(1);
     const tabletSrc = tablet.substring(1);
     const desktopSrc = desktop.substring(1);
 
-    const [state, setState] = useState({ imgSrc: mobileSrc });
+    const [state, setState] = useState<State>({ imgSrc: mobileSrc });
 
     const setNewImgScrBasedOnWindowWidth = useCallback(() => {
         const screenWidth = window.screen.width;
-        let newState = {};
+        let newState:State;
         if (screenWidth < 640) {
             newState = { imgSrc: mobileSrc };
         } else if (screenWidth < 1024) {

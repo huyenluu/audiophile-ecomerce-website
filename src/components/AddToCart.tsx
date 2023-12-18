@@ -1,12 +1,15 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../redux/cartSlice';
 import { IoMdCheckmark } from 'react-icons/io';
 import { ButtonDefault } from '../ui/Buttons';
 
-function AddToCartButton({ payload }) {
-    console.log(payload)
+interface AddToCartButtonProps {
+    payload: any;
+}
+
+const AddToCartButton: React.FC<AddToCartButtonProps> = ({ payload }) => {
     const dispatch = useDispatch();
     const [showSuccess, setShowSuccess] = useState(false);
     const [loading, setLoading] = useState(false);

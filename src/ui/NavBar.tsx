@@ -1,4 +1,4 @@
-import React, { useState, useEffect , FC } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FiShoppingCart } from 'react-icons/fi';
 import CategoryCardList from './CategoryCardList';
@@ -11,7 +11,7 @@ import { toggleOverlay, removeOverlay } from '../redux/uiSlice';
 type NavBarProps = {
     home?:boolean
 }
-const NavBar: FC<NavBarProps> = ({ home }) => {
+function NavBar ({ home }: NavBarProps){
     const [isDropdownMenuOpen, setDropDownMenuOpen] = useState<boolean>(false);
     const [isCartOpen, setIsCardOpen] = useState<boolean>(false);
     const location = useLocation();

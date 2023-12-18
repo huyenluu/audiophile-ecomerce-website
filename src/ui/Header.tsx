@@ -1,6 +1,10 @@
+import React from "react";
 import NavBar from './NavBar';
 
-function Header({ category }) {
+type PropsType = {
+    category: string;
+}
+const Header = ({ category }:PropsType) =>  {
     return (
         <header className="bg-black">
             <NavBar />

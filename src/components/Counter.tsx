@@ -1,23 +1,31 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteItem, changeItemQuantity } from '../redux/cartSlice';
 
-function Counter({ value, onValueChange, id, small }) {
-    const [counter, setCounter] = useState(1);
+interface CounterProps {
+    value?: number;
+    onValueChange?: (value: number) => void;
+    id?: string;
+    small?: boolean;
+}
+
+const Counter: React.FC<CounterProps> = ({ value, onValueChange, id, small }) => {
+    const [counter, setCounter] = useState<number>(1);
     const dispatch = useDispatch();
+
     const handleClickPlus = () => {
         if (!value && !id) {
-            onValueChange(counter + 1);
-            setCounter((counter) => counter + 1);
+            onValueChange && onValueChange(counter + 1);
+            setCounter((prevCounter) => prevCounter + 1);
         } else {
             dispatch(changeItemQuantity({ id, value: counter + 1 }));
         }
-        //dispatch(changeItemQuantity({ id, value: value + 1 }));
     };
+
     const handleClickMinus = () => {
         if (!value && !id) {
-            onValueChange(counter - 1);
-            setCounter((counter) => counter - 1);
+            onValueChange && onValueChange(counter - 1);
+            setCounter((prevCounter) => prevCounter - 1);
         } else if (value === 1) {
             dispatch(deleteItem(id));
         } else {
@@ -48,6 +56,6 @@ function Counter({ value, onValueChange, id, small }) {
             </button>
         </div>
     );
-}
+};
 
 export default Counter;

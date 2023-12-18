@@ -1,28 +1,36 @@
+import React from 'react';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Image from '../../ui/Image';
 import { ButtonDefault } from '../../ui/Buttons';
 import Counter from '../../components/Counter';
 import AddToCartButton from '../../components/AddToCart';
+import { Product } from '../../types/product.type';
 
-//to-do: add a function to split product name in 2 lines name/category name
+interface ProductCardProps {
+    data: Product;
+    index?: number;
+    showPrice?: boolean;
+}
 
-function ProductCard({ data, index, showPrice }) {
+function ProductCard({ data, index, showPrice }: ProductCardProps) {
     let location = useLocation();
     const [payload, setPayload] = useState({
         id: data.id,
         name: data.name,
         price: data.price,
-        image: data.image.mobile,
+        image: data.image,
         quantity: 1,
         totalPrice: data.price * 1,
     });
-    const onCounterChange = (value) => {
-        setPayload(payload => { return {
-            ...payload,
-            quantity: value,
-            totalPrice: data.price * value,
-        }});
+    const onCounterChange = (value: number) => {
+        setPayload((payload) => {
+            return {
+                ...payload,
+                quantity: value,
+                totalPrice: data.price * value,
+            };
+        });
     };
 
     return (
@@ -87,7 +95,7 @@ function ProductCard({ data, index, showPrice }) {
                                 key="counter-from-product-page"
                                 onValueChange={onCounterChange}
                             />
-                            <AddToCartButton payload={payload}/>
+                            <AddToCartButton payload={payload} />
                         </div>
                     </div>
                 )}

@@ -1,3 +1,4 @@
+import React from 'react';
 import { ButtonDefault } from '../../ui/Buttons';
 import CartEmpty from './CartEmpty';
 import CartItem from './CartItem';
@@ -9,7 +10,7 @@ import {
     selectTotalCartQuantity,
 } from '../../redux/cartSlice';
 
-function Cart() {
+function Cart(): JSX.Element {
     const cartItems = useSelector(selectCart);
     const totalPrice = useSelector(selectTotalCartPrice);
     const totalQuantity = useSelector(selectTotalCartQuantity);

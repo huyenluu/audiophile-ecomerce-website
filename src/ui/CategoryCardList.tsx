@@ -1,6 +1,18 @@
+import React from 'react';
 import { ButtonArrow } from './Buttons';
 
-export const CATEGORY_MENU_ITEMS = [
+type CattegoryMenuItems = {
+    name: string;
+    path: string;
+    image: string;
+};
+
+type CategoryCardListProps = {
+    classname?: string;
+    handleClick?: () => void;
+};
+
+export const CATEGORY_MENU_ITEMS: Array<CattegoryMenuItems> = [
     {
         name: 'headphones',
         path: '/category/headphones',
@@ -18,7 +30,7 @@ export const CATEGORY_MENU_ITEMS = [
     },
 ];
 
-function CategoryCardList({ classname, handleClick }) {
+const CategoryCardList: React.FC<CategoryCardListProps> = ({ classname, handleClick }) => {
     return (
         <div
             className={`${classname} z-[100] mb-16 flex w-full flex-col rounded-bl-lg rounded-br-lg bg-white sm:flex-row 

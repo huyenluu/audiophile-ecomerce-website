@@ -1,6 +1,19 @@
+import React from 'react';
 import Counter from '../Counter';
 
-function CartItem({ item, index, isCounterNeeded }) {
+type CartItemProps = {
+    item: {
+        image: string;
+        name: string;
+        price: number;
+        quantity: number;
+        id: string
+    },
+    index: number,
+    isCounterNeeded?: boolean,
+}
+
+const CartItem : React.FC<CartItemProps> = ({ item, index, isCounterNeeded }) => {
     const imageUrl = item.image.substring(1);
     return (
         <li

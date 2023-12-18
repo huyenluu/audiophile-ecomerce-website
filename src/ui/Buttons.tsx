@@ -1,6 +1,17 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-const handleMoveToTop = (moveToTop) => {
+type ButtonProps = {
+    content?: string;
+    className?: string;
+    link?: string;
+    onClick?: (event?: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+    moveToTop?: boolean;
+    children?: React.ReactNode;
+    [x: string]: any;
+};
+
+const handleMoveToTop = (moveToTop:boolean|undefined) => {
     if (moveToTop) {
         window.scrollTo({
             top: 0,
@@ -10,7 +21,7 @@ const handleMoveToTop = (moveToTop) => {
     }
 };
 
-const handleOnClick = (moveToTop, onClick) => {
+const handleOnClick = (moveToTop:boolean|undefined, onClick?:()=>void):void => {
     handleMoveToTop(moveToTop);
     if (onClick) onClick();
 };
@@ -23,7 +34,7 @@ export const ButtonDefault = ({
     moveToTop,
     children,
     ...props
-}) => {
+}: ButtonProps) => {
     return link ? (
         <Link
             to={link}
@@ -59,7 +70,7 @@ export const ButtonDefaultOutline = ({
     onClick,
     children,
     ...props
-}) => {
+}: ButtonProps) => {
     return link ? (
         <Link
             to={link}
@@ -87,7 +98,7 @@ export const ButtonDefaultOutline = ({
     );
 };
 
-export const ButtonArrow = ({ content, moveToTop, link, ...props }) => {
+export const ButtonArrow = ({ content, moveToTop, link, ...props}) => {
     return (
         <Link to={link} onClick={() => handleOnClick(moveToTop)} {...props}>
             <div className="flex w-16 cursor-pointer flex-row items-center gap-3">

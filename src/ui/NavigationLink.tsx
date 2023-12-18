@@ -1,9 +1,9 @@
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const MENU_ITEMS:string[] = ['home', 'headphones', 'speakers', 'earphones'];
 
-const NavigationLink: FC = () => {
+const NavigationLink = () => {
     const [activeLink, setActiveLink] = useState<string>(MENU_ITEMS[0]);
 
     const handleMenuItemClick = (item:string) => {
